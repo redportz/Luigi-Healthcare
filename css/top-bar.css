@@ -1,0 +1,29 @@
+header{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    height: 50px;
+    background-color: var(--navbar-bg);
+}
+
+a#healthcare-icon img{
+    height: 50px;
+}
+
+header #middle-topbar{
+    text-align: center;
+}
+
+#right-topbar{
+    text-align: right;
+}
+
+#create-account-btn{
+    height: 47px;
+}
+
+#login-btn i{
+    font-size: 50px;
+    vertical-align: bottom;
+}
+
+

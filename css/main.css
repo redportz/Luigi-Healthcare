@@ -1,0 +1,22 @@
+:root {
+    --navbar-bg: #2D6A4F; /* Deep Green (Navbar) */
+    --sidebar-bg: #40916C; /* Soft Green (Sidebar, if used) */
+    --background-color: #F8F9FA; /* Light Gray (Main Background) */
+    --card-bg: #FFFFFF; /* White (Card/Panel Backgrounds) */
+    --border-color: #DEE2E6; /* Light Gray (Dividers & Borders) */
+    --text-color: #343A40; /* Dark Gray (Main Text) */
+    
+    --button-color: #D00000; /* Deep Red (Logout & Primary Actions) */
+    --button-hover: #B00000; /* Slightly Darker Red (Button Hover) */
+    
+    --login-btn: #B4E5A2; /* Bright Blue (Login Button) */
+    --login-hover: #4EA72F; /* Darker Blue (Login Hover) */
+    
+    --hover-color: #FFBA08; /* Warm Yellow (Hover Effects) */
+    
+    --menu-icon: #FFFFFF; /* White (Hamburger Menu Icon) */
+    --menu-hover: #FFBA08; /* Yellow (Hamburger Hover) */
+    --menu-bg: #40916C; /* Soft Green (Expanded Menu Background) */
+
+    --message-bg: #E9ECEF; /* Light Gray (Message Bubbles/Logs) */
+}

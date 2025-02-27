@@ -1,0 +1,25 @@
+{
+    "Username":[
+        {
+            "apples":[
+                {
+                    "password": "1234!",
+                    "role": "Patient"
+                    
+                }
+            ],
+            "senz123":[
+                {
+                    "password": "newpassword!",
+                    "role": "Doctor"
+                }
+            ],
+            "adzminz":[
+                {
+                    "password": "yes2!",
+                    "role": "Admin"
+                }
+            ]
+        }
+    ]
+}
