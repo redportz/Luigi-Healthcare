@@ -4,7 +4,7 @@
     --background-color: #F8F9FA; /* Light Gray (Main Background) */
     --card-bg: #FFFFFF; /* White (Card/Panel Backgrounds) */
     --border-color: #DEE2E6; /* Light Gray (Dividers & Borders) */
-    --text-color: #343A40; /* Dark Gray (Main Text) */
+    --text-color: white; /* White (Main Text) */
     
     --button-color: #D00000; /* Deep Red (Logout & Primary Actions) */
     --button-hover: #B00000; /* Slightly Darker Red (Button Hover) */
@@ -19,4 +19,12 @@
     --menu-bg: #40916C; /* Soft Green (Expanded Menu Background) */
 
     --message-bg: #E9ECEF; /* Light Gray (Message Bubbles/Logs) */
+}
+
+body{
+    padding: 0;
+    margin: 0;
+}
+main{
+    padding-top: 50px;
 }
