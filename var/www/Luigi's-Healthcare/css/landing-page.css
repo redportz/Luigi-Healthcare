@@ -24,10 +24,14 @@ body{
 
 .landing-page-text-and-image h1 {
     font-size: 28px;
+    margin: 0;
+    padding: 0;
 }
 
 .landing-page-text-and-image p {
     font-size: 18px;
+    margin: 0;
+    padding: 0;
 }
 
 /* Image Section */
