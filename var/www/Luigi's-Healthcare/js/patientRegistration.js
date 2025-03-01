@@ -20,8 +20,9 @@ document.getElementById("patient-form").addEventListener("submit", async functio
         });
 
         if (response.ok) {
-            // ✅ Redirect to "account-created.html" after successful account creation
-            window.location.href = "/account-stuff/account-created.html";
+            //if account created  hide form and display Account created
+            document.getElementById("patient-form").style.display = "none";
+            document.getElementById("account-created-message").style.display = "flex";
         } else {
             const errorMessage = await response.text();
             alert("Error: " + errorMessage);

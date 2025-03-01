@@ -3,9 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+    <title>Luigi's Healthcare</title>
+    <script src="https://kit.fontawesome.com/1ba04f7b66.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/var/www/Luigi's-Healthcare/css/main.css">
+    <link rel="stylesheet" href="/var/www/Luigi's-Healthcare/css/top-bar.css">
+    <link rel="stylesheet" href="/var/www/Luigi's-Healthcare/css/login-page.css">
 <body>
+    <header>
+        <div id="left-topbar">
+            <a id="healthcare-icon"><img src="/var/www/Luigi's-Healthcare/images/Logo.png" alt="Luigi's Healthcare Logo"></a>
+        </div>
+        <div id="middle-topbar">
+            <p id="Luigi's Healthcare">Luigi's Healthcare</p>
+        </div>
+        <div id="right-topbar">
+                <button class="create-account-btn" title="Click to Create Account" href="">
+                    <span>Create <br>Account
+                 </button>
+            <!-- <a id="login-btn" title="Click to log in" href="/var/www/Luigi's-Healthcare/account-stuff/login-page.html"><i class="fa-solid fa-right-to-bracket"></i></a> -->
+        </div>
+    </header>
+
+    <main>
+        <div class="form-container">        <div class="form-header">
+            <img src="/var/www/Luigi's-Healthcare/images/Logo.png" alt="Luigi's Healthcare Logo">
+            <h2>Luigi Healthcare</h2>
+        </div>
+
+        <form id="Login-form">
+            <label for="Username">Username</label>
+            <input type="text" id="first-name" name="first-name" placeholder="John"  required>
+            <label for="last-name">Last Name:</label>
+            <input type="text" id="last-name" name="last-name" placeholder="Doe" required>
+        
+        </form>
+
+        <div class="login-actions">
+            <button title="Click to Login" type="submit" class="login-btn" form="login-form">Log in</button><br>
+            <a href="#">Forgot Password?</a>
+        </div>
+        
+    </main>
     
 </body>
 </html>

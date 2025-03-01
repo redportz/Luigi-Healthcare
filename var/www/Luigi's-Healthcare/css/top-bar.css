@@ -58,15 +58,27 @@ header #middle-topbar{
     background-color: var(--login-hover);
 }
 
-#login-btn i{
+#login-btn i , #logout-btn i{
     font-size: 50px;
     margin-right: 10px;
     margin-left: 10px;
     vertical-align: bottom;
+}
+
+#login-btn i{
     color: var(--login-btn);
 }
+
 #login-btn i:hover{
     color: var(--login-hover);
+}
+
+#logout-btn i{
+    color: var(--button-color);
+}
+
+#logout-btn i:hover{
+    color: var(--button-hover);
 }
 
 
