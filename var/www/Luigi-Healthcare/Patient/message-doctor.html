@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luigi Healthcare</title>
+    <title>Luigi Healthcare - New Message</title>
     <script src="https://kit.fontawesome.com/1ba04f7b66.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/var/www/Luigi-Healthcare/css/main.css">
     <link rel="stylesheet" href="/var/www/Luigi-Healthcare/css/top-bar.css">
-    <link rel="stylesheet" href="/var/www/Luigi-Healthcare/css/login-page.css">
-    <link rel="stylesheet" href="/var/www/Luigi-Healthcare/css/sidebar-menu.css">
-    <!-- Add style sheet here -->
+    <link rel="stylesheet" href="/var/www/Luigi-Healthcare/css/messaging.css"> 
 </head>
 <body>
     <header>
@@ -20,37 +18,28 @@
             <p id="Luigi Healthcare">Luigi Healthcare</p>
         </div>
         <div id="right-topbar">
-            <a id="logout-btn" title="Click to log out" href="/var/www/Luigi-Healthcare/account-stuff/login-page.html">
-                <i class="fa-solid fa-right-from-bracket"></i>
-            </a>
-            <button class="menu-btn" aria-label="Open Menu">
-                <i class="fa-solid fa-bars"></i>
-              </button>
-            </header>
+            <a id="logout-btn" title="Click to log out" href="/var/www/Luigi-Healthcare/account-stuff/login-page.html"><i class="fa-solid fa-right-from-bracket"></i></a>
         </div>
     </header>
 
-    <!-- sidebar -->
-    <nav class="sidebar" id="sidebar">
-        <button class="close-btn" aria-label="Close Menu">&times;</button>
-        <ul>
-            <!-- Change menu items here -->
-          <li><a href="/var/www/Luigi-Healthcare/Patient/profile.html">Profile</a></li>
-          <li><a href="/var/www/Luigi-Healthcare/Patient/Dashboard.html">Appointment</a></li>
-          <li><a href="/var/www/Luigi-Healthcare/Patient/records.html">Records</a></li>
-          <li><a href="/var/www/Luigi-Healthcare/Patient/Prescriptions.html">Prescriptions</a></li>
-          <li><a href="/var/www/Luigi-Healthcare/Patient/billing.html">Billing</a></li>
-          <li><a href="/var/www/Luigi-Healthcare/Patient/treatment-plan.html">Treatment Plan</a></li>
-          <li><a href="/var/www/Luigi-Healthcare/Patient/message-doctor.html">Message Doctor</a></li>
-        </ul>
-      </nav>
-
     <main>
-        <!-- Your page content goes here -->
-         message doctor
+        <div class="envelope">
+            <div class="envelope-header">
+                <h2>New Message</h2>
+                <button id="cancel-btn">Cancel</button>
+            </div>
+            <div class="envelope-body">
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" placeholder="Message Subject">
+                <label for="message">Message:</label>
+                <textarea id="message" placeholder="Type your message here..."></textarea>
+            </div>
+            <div class="envelope-footer">
+                <button id="send-btn">Send to Doctor</button>
+            </div>
+        </div>
     </main>
-    <a href="/var/www/Luigi-Healthcare/feedback/feedback.html"></a>
-    <script src="/var/www/Luigi-Healthcare/js/logout.js"></script>
-    <script src="/var/www/Luigi-Healthcare/js/sidebar-menu.js"></script>
+
+    <!-- <script src="/var/www/Luigi-Healthcare/js/logout.js"></script> --> <!---->
 </body>
 </html>
