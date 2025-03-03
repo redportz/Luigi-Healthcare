@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/var/www/Luigi-Healthcare/css/main.css">
     <link rel="stylesheet" href="/var/www/Luigi-Healthcare/css/top-bar.css">
     <link rel="stylesheet" href="/var/www/Luigi-Healthcare/css/login-page.css">
+    <head>
 <body>
     <header>
         <div id="left-topbar">
@@ -30,20 +31,21 @@
             <h2>Luigi Healthcare</h2>
         </div>
 
-        <form id="Login-form">
-            <label for="Username">Username</label>
-            <input type="text" id="first-name" name="first-name" placeholder="John"  required>
-            <label for="last-name">Last Name:</label>
-            <input type="text" id="last-name" name="last-name" placeholder="Doe" required>
+        <form id="login-form">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Username"  required>
+            <label for="password">Password</label>
+            <input type="text" id="password" name="last-name" placeholder="password" required>
         
         </form>
 
         <div class="login-actions">
             <button title="Click to Login" type="submit" class="login-btn" form="login-form">Log in</button><br>
-            <a href="#">Forgot Password?</a>
+            <a href="/var/www/Luigi-Healthcare/account-stuff/forgot-password.html">Forgot Password?</a>
         </div>
         
     </main>
+    <script src="/var/www/Luigi-Healthcare/js/login.js"></script>
     
 </body>
 </html>

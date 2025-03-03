@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="/var/www/Luigi-Healthcare/css/top-bar.css">
     <link rel="stylesheet" href="/var/www/Luigi-Healthcare/css/login-page.css">
     <link rel="stylesheet" href="/var/www/Luigi-Healthcare/css/sidebar-menu.css">
-
     <!-- Add style sheet here -->
 </head>
 <body>
@@ -24,13 +23,34 @@
             <a id="logout-btn" title="Click to log out" href="/var/www/Luigi-Healthcare/account-stuff/login-page.html">
                 <i class="fa-solid fa-right-from-bracket"></i>
             </a>
+            <button class="menu-btn" aria-label="Open Menu">
+                <i class="fa-solid fa-bars"></i>
+              </button>
+            </header>
         </div>
     </header>
 
+    <!-- sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <button class="close-btn" aria-label="Close Menu">&times;</button>
+        <ul>
+            <!-- Change menu items here -->
+          <li><a href="/var/www/Luigi-Healthcare/Patient/profile.html">Profile</a></li>
+          <li><a href="/var/www/Luigi-Healthcare/Patient/Dashboard.html">Appointment</a></li>
+          <li><a href="/var/www/Luigi-Healthcare/Patient/records.html">Records</a></li>
+          <li><a href="/var/www/Luigi-Healthcare/Patient/Prescriptions.html">Prescriptions</a></li>
+          <li><a href="/var/www/Luigi-Healthcare/Patient/billing.html">Billing</a></li>
+          <li><a href="/var/www/Luigi-Healthcare/Patient/treatment-plan.html">Treatment Plan</a></li>
+          <li><a href="/var/www/Luigi-Healthcare/Patient/message-doctor.html">Message Doctor</a></li>
+        </ul>
+      </nav>
+
     <main>
         <!-- Your page content goes here -->
+         billing
     </main>
     <a href="/var/www/Luigi-Healthcare/feedback/feedback.html"></a>
     <script src="/var/www/Luigi-Healthcare/js/logout.js"></script>
+    <script src="/var/www/Luigi-Healthcare/js/sidebar-menu.js"></script>
 </body>
 </html>

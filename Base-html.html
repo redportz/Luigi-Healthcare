@@ -7,7 +7,11 @@
     <script src="https://kit.fontawesome.com/1ba04f7b66.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/var/www/Luigi-Healthcare/css/main.css">
     <link rel="stylesheet" href="/var/www/Luigi-Healthcare/css/top-bar.css">
-    <body>
+    <link rel="stylesheet" href="/var/www/Luigi-Healthcare/css/login-page.css">
+    <link rel="stylesheet" href="/var/www/Luigi-Healthcare/css/sidebar-menu.css">
+    <!-- Add style sheet here -->
+</head>
+<body>
     <header>
         <div id="left-topbar">
             <a id="healthcare-icon"><img src="/var/www/Luigi-Healthcare/images/Logo.png" alt="Luigi's Healthcare Logo"></a>
@@ -16,14 +20,36 @@
             <p id="Luigi Healthcare">Luigi Healthcare</p>
         </div>
         <div id="right-topbar">
-                
-            <a id="logout-btn" title="Click to log out" href="/var/www/Luig-Healthcare/account-stuff/login-page.html"><i class="fa-solid fa-right-from-bracket"></i></a>
+            <a id="logout-btn" title="Click to log out" href="/var/www/Luigi-Healthcare/account-stuff/login-page.html">
+                <i class="fa-solid fa-right-from-bracket"></i>
+            </a>
+            <button class="menu-btn" aria-label="Open Menu">
+                <i class="fa-solid fa-bars"></i>
+              </button>
+            </header>
         </div>
     </header>
 
+    <!-- sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <button class="close-btn" aria-label="Close Menu">&times;</button>
+        <ul>
+            <!-- Change menu items here -->
+          <li><a href="#">Profile</a></li>
+          <li><a href="#">Appointment</a></li>
+          <li><a href="#">Records</a></li>
+          <li><a href="#">Prescriptions</a></li>
+          <li><a href="#">Billing</a></li>
+          <li><a href="#">Treatment Plan</a></li>
+          <li><a href="#">Message Doctor</a></li>
+        </ul>
+      </nav>
+
     <main>
-        
+        <!-- Your page content goes here -->
     </main>
-    
+    <a href="/var/www/Luigi-Healthcare/feedback/feedback.html"></a>
+    <script src="/var/www/Luigi-Healthcare/js/logout.js"></script>
+    <script src="/var/www/Luigi-Healthcare/js/sidebar-menu.js"></script>
 </body>
 </html>
