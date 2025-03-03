@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luigi's Healthcare - 2FA</title>
+    <link rel="stylesheet" href="two-fa.css">
+    <link rel="stylesheet" href="/var/www/Luigi-Healthcare/css/main.css">
+    <link rel="stylesheet" href="/var/www/Luigi-Healthcare/css/top-bar.css">
+    <link rel="stylesheet" href="/var/www/Luigi-Healthcare/css/login-page.css">
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <!-- Logo image here -->
+            </div>
+            <div class="title">
+                <h1>Luigi's Healthcare</h1>
+            </div>
+            <div class="user-info">
+                <!-- User info/logout here -->
+            </div>
+        </header>
+
+        <main>
+            <div class="two-fa-form">
+                <h2>Enter email</h2>
+                <form id="two-fa-form" method="post" action="/your-verification-endpoint">
+                    <label for="email">Enter email:</label>
+                    <input type="email" id="email" name="email" placeholder="example@email.com" required>
+                    <button type="submit">Continue</button>
+                </form>
+                <div class="arrow">
+                    <img src="arrow.png" alt="Click to go">
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
