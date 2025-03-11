@@ -28,20 +28,17 @@
             </header>
         </div>
         <!-- sidebar -->
-        <nav class="sidebar" id="sidebar">
-            <button class="close-btn" aria-label="Close Menu">&times;</button>
-            <ul>
-                <!-- Change menu items here -->
-              <li><a href="#">Profile</a></li>
-              <li><a href="#">Appointment</a></li>
-              <li><a href="#">Records</a></li>
-              <li><a href="#">Prescriptions</a></li>
-              <li><a href="#">Billing</a></li>
-              <li><a href="#">Treatment Plan</a></li>
-              <li><a href="#">Message Doctor</a></li>
-            </ul>
-          </nav>
-    </header>
+        <div id="sidebar-container"></div>
+
+        <script>
+            // change "Patient" to whatever you are using the the page for
+            fetch('/side-bar-menu/Patient-sidebar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('sidebar-container').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading sidebar:', error));
+        </script>
 
     <main>
         <!-- Your page content goes here -->

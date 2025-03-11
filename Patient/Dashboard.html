@@ -29,19 +29,17 @@
         </div>
     </header>
     
-    <nav class="sidebar" id="sidebar">
-        <button class="close-btn" aria-label="Close Menu">&times;</button>
-        <ul>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Appointment</a></li>
-            <li><a href="#">Records</a></li>
-            <li><a href="#">Prescriptions</a></li>
-            <li><a href="#">Billing</a></li>
-            <li><a href="#">Treatment Plan</a></li>
-            <li><a href="#">Message Doctor</a></li>
-        </ul>
-    </nav>
+    <div id="sidebar-container"></div>
 
+    <script>
+        fetch('/side-bar-menu/Patient-sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading sidebar:', error));
+    </script>
+    
     <main>
         <h1>Appointment Calendar</h1>
         <div id='calendar'></div>

@@ -29,19 +29,17 @@
             </header>
         </div>
         <!-- sidebar -->
-        <nav class="sidebar" id="sidebar">
-            <button class="close-btn" aria-label="Close Menu">&times;</button>
-            <ul>
-                <!-- Change menu items here -->
-              <li><a href="/Patient/profile.html">Profile</a></li>
-              <li><a href="/Patient/Dashboard.html">Appointment</a></li>
-              <li><a href="/Patient/records.html">Records</a></li>
-              <li><a href="/Patient/Prescriptions.html">Prescriptions</a></li>
-              <li><a href="/Patient/billing.html">Billing</a></li>
-              <li><a href="/Patient/treatment-plan.html">Treatment Plan</a></li>
-              <li><a href="/Patient/message-doctor.html">Message Doctor</a></li>
-            </ul>
-          </nav>
+        <div id="sidebar-container"></div>
+
+<script>
+    fetch('/side-bar-menu/Patient-sidebar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('sidebar-container').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading sidebar:', error));
+</script>
+
     </header>
 
     <main>
