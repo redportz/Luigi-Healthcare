@@ -28,17 +28,12 @@
             </header>
         </div>
         <!-- sidebar -->
-        <div id="sidebar-container"></div>
-
-        <script>
-            // change "Patient" to whatever you are using the the page for
-            fetch('/side-bar-menu/Patient-sidebar.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('sidebar-container').innerHTML = data;
-                })
-                .catch(error => console.error('Error loading sidebar:', error));
-        </script>
+         <!-- change nav_menu based upon what menu you want:
+          Patient
+          Admin
+          Doctor
+           -->
+        <div id="sidebar-container" nav_menu="Patient"></div>
 
     <main>
         <!-- Your page content goes here -->

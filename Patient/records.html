@@ -29,16 +29,16 @@
             </header>
         </div>
         <!-- sidebar -->
-        <div id="sidebar-container"></div>
+        <div id="sidebar-container" nav_menu="Patient"></div>
 
-        <script>
-            fetch('/side-bar-menu/Patient-sidebar.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('sidebar-container').innerHTML = data;
-                })
-                .catch(error => console.error('Error loading sidebar:', error));
-        </script>
+    <script>
+        fetch('/side-bar-menu/Patient-sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading sidebar:', error));
+    </script>
     </header>
 
     <main>

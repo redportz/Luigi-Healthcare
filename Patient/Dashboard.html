@@ -29,17 +29,8 @@
         </div>
     </header>
     
-    <div id="sidebar-container"></div>
+    <div id="sidebar-container" nav_menu="Patient"></div>
 
-    <script>
-        fetch('/side-bar-menu/Patient-sidebar.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('sidebar-container').innerHTML = data;
-            })
-            .catch(error => console.error('Error loading sidebar:', error));
-    </script>
-    
     <main>
         <h1>Appointment Calendar</h1>
         <div id='calendar'></div>
@@ -83,6 +74,7 @@
     <a target="_blank" href="/feedback/feedback.html">Give Feedback</a>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/load-sidebar.js"></script>
     <script src="/js/logout.js"></script>
     <script src="/js/sidebar-menu.js"></script>
     <script src="/js/calendar.js"></script>
