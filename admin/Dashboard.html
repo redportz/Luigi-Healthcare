@@ -5,50 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luigi Healthcare</title>
     <script src="https://kit.fontawesome.com/1ba04f7b66.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/var/www/Luigi-Healthcare/css/main.css">
-    <link rel="stylesheet" href="/var/www/Luigi-Healthcare/css/top-bar.css">
-    <link rel="stylesheet" href="/var/www/Luigi-Healthcare/css/sidebar-menu.css">
-    <!-- Add style sheet here -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/top-bar.css">
+    <link rel="stylesheet" href="/css/sidebar-menu.css">
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet' />
+    <link rel="stylesheet" href="/css/calendar.css">
 </head>
 <body>
     <header>
         <div id="left-topbar">
-            <a id="healthcare-icon"><img src="/var/www/Luigi-Healthcare/images/Logo.png" alt="Luigi's Healthcare Logo"></a>
+            <a id="healthcare-icon"><img src="/images/Logo.png" alt="Luigi's Healthcare Logo"></a>
         </div>
         <div id="middle-topbar">
             <p id="Luigi Healthcare">Luigi Healthcare</p>
         </div>
         <div id="right-topbar">
-            <a id="logout-btn" title="Click to log out" href="/var/www/Luigi-Healthcare/account-stuff/login-page.html">
+            <a id="logout-btn" title="Click to log out" href="/account-stuff/login-page.html">
                 <i class="fa-solid fa-right-from-bracket"></i>
             </a>
             <button class="menu-btn" aria-label="Open Menu">
                 <i class="fa-solid fa-bars"></i>
-              </button>
-            </header>
+            </button>
         </div>
-        <!-- sidebar -->
-        <nav class="sidebar" id="sidebar">
-            <button class="close-btn" aria-label="Close Menu">&times;</button>
-            <ul>
-                <!-- Change menu items here -->
-              <li><a href="#">Profile</a></li>
-              <li><a href="#">Appointment</a></li>
-              <li><a href="#">Records</a></li>
-              <li><a href="#">Prescriptions</a></li>
-              <li><a href="#">Billing</a></li>
-              <li><a href="#">Treatment Plan</a></li>
-              <li><a href="#">Message Doctor</a></li>
-            </ul>
-          </nav>
     </header>
+    
+    <nav class="sidebar" id="sidebar">
+        <button class="close-btn" aria-label="Close Menu">&times;</button>
+        <ul>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Appointment</a></li>
+            <li><a href="#">Records</a></li>
+            <li><a href="#">Prescriptions</a></li>
+            <li><a href="#">Billing</a></li>
+            <li><a href="#">Treatment Plan</a></li>
+            <li><a href="#">Message Doctor</a></li>
+        </ul>
+    </nav>
 
     <main>
-        <!-- Your page content goes here -->
+        <h1>Appointment Calendar</h1>
+        <div id='calendar'></div>
     </main>
 
-    <a target="_blank" href="/var/www/Luigi-Healthcare/feedback/feedback.html"></a>
-    <script src="/var/www/Luigi-Healthcare/js/logout.js"></script>
-    <script src="/var/www/Luigi-Healthcare/js/sidebar-menu.js"></script>
+    <div id="appointment-popup" class="popup">
+        <div class="popup-content">
+            <span class="close-popup">&times;</span>
+            <h2>Manage Appointment</h2>
+            <form id="appointment-form">
+                <label for="appointment-title">Title:</label>
+                <input type="text" id="appointment-title" required>
+                <label for="appointment-date">Date:</label>
+                <input type="date" id="appointment-date" required>
+                <label for="appointment-time">Time:</label>
+                <input type="time" id="appointment-time" required>
+                <button type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="edit-appointment-popup" class="popup">
+        <div class="popup-content">
+            <span class="close-popup">&times;</span>
+            <h2>Edit Appointment</h2>
+            <form id="edit-appointment-form">
+                <label for="edit-appointment-title">Title:</label>
+                <input type="text" id="edit-appointment-title" required>
+                <label for="edit-appointment-date">Date:</label>
+                <input type="date" id="edit-appointment-date" required>
+                <label for="edit-appointment-time">Time:</label>
+                <input type="time" id="edit-appointment-time" required>
+                <button type="button" id="save-edit-btn">Save</button>
+                <button type="button" id="delete-btn" class="delete">Delete</button>
+            </form>
+        </div>
+    </div>
+
+
+
+    <a target="_blank" href="/feedback/feedback.html">Give Feedback</a>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/logout.js"></script>
+    <script src="/js/sidebar-menu.js"></script>
+    <script src="/js/calendar.js"></script>
 </body>
 </html>

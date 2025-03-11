@@ -8,7 +8,7 @@ function resetLogoutTimer() {
   logoutTimer = setTimeout(() => {
     localStorage.removeItem("user");
     alert("Session expired. Please log in again.");
-    window.location.href = "/var/www/Luigi-Healthcare/account-stuff/login-page.html";
+    window.location.href = "/account-stuff/login-page.html";
   }, AUTO_LOGOUT_TIME);
 }
 
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const userData = localStorage.getItem("user");
   if (!userData) {
     // If no user is found, redirect to login
-    window.location.href = "/var/www/Luigi-Healthcare/account-stuff/login-page.html";
+    window.location.href = "/account-stuff/login-page.html";
     return;
   }
   
@@ -29,14 +29,14 @@ document.addEventListener("DOMContentLoaded", function() {
   // If the current page is in the "/Doctor/" folder but the user's role isn't "Doctor"
   if (currentPath.includes("/Doctor/") && user.role !== "Doctor") {
     alert("Access Denied: You are not authorized to view this page.");
-    window.location.href = "/var/www/Luigi-Healthcare/account-stuff/login-page.html";
+    window.location.href = "/account-stuff/login-page.html";
     return;
   }
   
   // If the current page is in the "/admin/" folder but the user's role isn't "Administrator"
   if (currentPath.includes("/admin/") && user.role !== "Administrator") {
     alert("Access Denied: You are not authorized to view this page.");
-    window.location.href = "/var/www/Luigi-Healthcare/account-stuff/login-page.html";
+    window.location.href = "/account-stuff/login-page.html";
     return;
   }
   
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
     logoutBtn.addEventListener("click", function(event) {
       event.preventDefault();
       localStorage.removeItem("user");
-      window.location.href = "/var/www/Luigi-Healthcare/account-stuff/login-page.html";
+      window.location.href = "/account-stuff/login-page.html";
     });
   }
 });
