@@ -76,3 +76,10 @@
 #delete-btn:hover {
     background: darkred;
 }
+.fc-direction-ltr {
+    height: 100%;
+
+}
+.fc .fc-toolbar.fc-header-toolbar {
+    padding-top: 5px;
+}
