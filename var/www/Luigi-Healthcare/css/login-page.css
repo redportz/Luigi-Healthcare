@@ -1,6 +1,5 @@
 
 main{
-    height: 100vh;
     align-content: center;
 }
 
@@ -11,7 +10,8 @@ main{
     align-items: center;
     width: 30%;
     height: 40vh;
-    margin: 50px auto;
+    min-width: 250px;
+    min-height: 370px;
     background-color: var(--navbar-bg);
     padding: 30px;
     border-radius: 20px;
@@ -19,7 +19,8 @@ main{
     color: white;
     text-align: center;
     overflow: auto;
-    margin-top: -50px;
+    justify-self: center;
+
 }
 
 /* Logo & Header */
