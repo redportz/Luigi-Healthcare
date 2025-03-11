@@ -8,43 +8,28 @@
   <h1>API Test using XMLHttpRequest</h1>
   <p>Open your browser console to see the results.</p>
   <script>
-    // Replace with your actual API endpoint URL
-    var url = "https://healthcaredbbackendapi.azure-api.net/UserInfo/AddUserInfo"; 
+const myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
 
-    // Create a new XMLHttpRequest object
-    var xhr = new XMLHttpRequest();
-    
-    // Open a POST request
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-Type", "application/json");
+const raw = JSON.stringify({
+  "id": 0,
+  "firstName": "newguy",
+  "lastName": "string",
+  "mobile": "string"
+});
 
-    // If your API requires a subscription key, include it:
-    // xhr.setRequestHeader("Ocp-Apim-Subscription-Key", "<Your_Subscription_Key>");
+const requestOptions = {
+  method: "POST",
+  headers: myHeaders,
+  body: raw,
+  redirect: "follow"
+};
 
-    // Define what happens when the request state changes
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                // Parse and log the JSON response
-                var json = JSON.parse(xhr.responseText);
-                console.log("Response:", json);
-            } else {
-                console.error("Error:", xhr.status, xhr.statusText);
-            }
-        }
-    };
+fetch("https://healthcaredbbackendapi.azure-api.net/UserInfo/AddUserInfo", requestOptions)
+  .then((response) => response.text())
+  .then((result) => console.log(result))
+  .catch((error) => console.error('Error:', error));
 
-    // Prepare the data to be sent (adjust fields as needed)
-    var data = JSON.stringify({
-      "id": 0,
-      "firstName": "string",
-      "lastName": "string",
-      "mobile": "string"
-    });
-    
-    // Send the request with the JSON data
-    xhr.send(data);
   </script>
 </body>
 </html>
-
