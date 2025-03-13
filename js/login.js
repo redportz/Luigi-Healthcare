@@ -2,18 +2,18 @@ document.getElementById("login-form").addEventListener("submit", async function(
     event.preventDefault(); // Prevent default form submission
     // Toggle flag: set to false for simulated login, true for real API call.
     const useRealAPI=false;
-    const enteredUsername = document.getElementById("username").value;
+    const enteredEmail = document.getElementById("email").value;
     const enteredPassword = document.getElementById("password").value;
     let user=null;
 
     if (!useRealAPI) {
-        if (enteredUsername === "AdminTest" && enteredPassword === "pass123") {
+        if (enteredEmail === "AdminTest" && enteredPassword === "pass123") {
             // Admin test login: simulate user data for an Administrator
             user = { firstName: "Admin", lastName: "Test", role: "Administrator" };
-        } else if (enteredUsername === "DoctorTest" && enteredPassword === "pass123") {
+        } else if (enteredEmail === "DoctorTest" && enteredPassword === "pass123") {
             // Doctor test login: simulate user data for a Doctor
             user = { firstName: "Doctor", lastName: "Test", role: "Doctor" };
-        } else if (enteredUsername === "PatientTest" && enteredPassword === "pass123") {
+        } else if (enteredEmail === "PatientTest" && enteredPassword === "pass123") {
             // Patient test login: simulate user data for a Patient
             user = { firstName: "Patient", lastName: "Test", SSN: "123456789", role: "Patient" };
         } else {
@@ -29,7 +29,7 @@ document.getElementById("login-form").addEventListener("submit", async function(
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ username: enteredUsername, password: enteredPassword })
+                body: JSON.stringify({ username: enteredEmail, password: enteredPassword })
             });
 
             if (response.ok) {
