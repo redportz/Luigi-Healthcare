@@ -2,23 +2,37 @@
 
 document.getElementById("patient-form").addEventListener("submit", async function(event) {
     event.preventDefault(); // Prevent default form submission
-    const useRealAPI = false;
+    const useRealAPI = true;
     const today=new Date().toISOString().split("T")[0];
-   
 
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirm-password").value;
+    const ssn = document.getElementById("ssn").value;
+
+
+    if (password !== confirmPassword) {
+        alert("Passwords do not match. Please try again.");
+        return;
+    }
+
+    if (ssn.length !== 9) {
+        alert("SSN must be exactly 9 digits.");
+        return;
+    }
 
     const formData = {
         firstName: document.getElementById("first-name").value,
         lastName: document.getElementById("last-name").value,
         dateOfBirth: document.getElementById("dob").value,
-        SSN: document.getElementById("ssn").value,
+        ssn: ssn,
         email: document.getElementById("email").value,
+        password: password,
         insuranceName: document.getElementById("insurance-name").value,
         memberId: document.getElementById("member-id").value,
         role: "Patient"
     };
     
-    if (formData.dateOfBirth>= today){
+    if (new Date(formData.dateOfBirth) >= new Date(today)){
         alert("Please select a date before today.");
     }else if (!useRealAPI) {
         // Simulated account creation:
@@ -27,7 +41,7 @@ document.getElementById("patient-form").addEventListener("submit", async functio
     } else {
         // Real API call:
         try {
-            const response = await fetch("http://localhost:5000/api/patients/create", {
+            const response = await fetch("https://healthcaredbbackendapi.azure-api.net/api/auth/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -36,7 +50,7 @@ document.getElementById("patient-form").addEventListener("submit", async functio
             });
 
             if (response.ok) {
-                console.log("✅ Real API Account Created:", formData);
+                console.log("Real Account Created:", formData);
                 document.getElementById("patient-form").style.display = "none";
                 document.getElementById("account-created-message").style.display = "flex";
             } else {

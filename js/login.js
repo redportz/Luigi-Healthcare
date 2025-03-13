@@ -1,7 +1,7 @@
 document.getElementById("login-form").addEventListener("submit", async function(event) {
     event.preventDefault(); // Prevent default form submission
     // Toggle flag: set to false for simulated login, true for real API call.
-    const useRealAPI=false;
+    const useRealAPI=true;
     const enteredEmail = document.getElementById("email").value;
     const enteredPassword = document.getElementById("password").value;
     let user=null;
