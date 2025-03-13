@@ -7,13 +7,13 @@ document.getElementById("login-form").addEventListener("submit", async function(
     let user=null;
 
     if (!useRealAPI) {
-        if (enteredEmail === "AdminTest" && enteredPassword === "pass123") {
+        if (enteredEmail === "AdminTest@email.com" && enteredPassword === "pass123") {
             // Admin test login: simulate user data for an Administrator
             user = { firstName: "Admin", lastName: "Test", role: "Administrator" };
-        } else if (enteredEmail === "DoctorTest" && enteredPassword === "pass123") {
+        } else if (enteredEmail === "DoctorTest@email.com" && enteredPassword === "pass123") {
             // Doctor test login: simulate user data for a Doctor
             user = { firstName: "Doctor", lastName: "Test", role: "Doctor" };
-        } else if (enteredEmail === "PatientTest" && enteredPassword === "pass123") {
+        } else if (enteredEmail === "PatientTest@email.com" && enteredPassword === "pass123") {
             // Patient test login: simulate user data for a Patient
             user = { firstName: "Patient", lastName: "Test", SSN: "123456789", role: "Patient" };
         } else {
@@ -24,26 +24,28 @@ document.getElementById("login-form").addEventListener("submit", async function(
     }
     else{
         try {
-            const response = await fetch("http://localhost:5000/api/auth/login", {
+            const response = await fetch("https://healthcaredbbackendapi.azure-api.net/api/auth/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ username: enteredEmail, password: enteredPassword })
+                body: JSON.stringify({ email: enteredEmail, password: enteredPassword }) 
             });
 
             if (response.ok) {
                 const result = await response.json();
                 console.log("Real API Login Successful:", result);
-                handleLoginSuccess(result); // Redirect & store data
+
+
+                handleLoginSuccess(result); 
             } else {
-                throw new Error(await response.text()); // Handles error message properly
+                throw new Error(await response.text()); 
             }
         } catch (apiError) {
             console.error("API Call Failed:", apiError);
             alert("Login failed. Please try again.");
         }
-}
+    }
 });
 
 // 🔹 Function to handle login success, store user data & redirect
@@ -67,7 +69,6 @@ function handleLoginSuccess(user) {
     }
 }
 
-// 🔹 Function to store user info in localStorage (or cookies)
 function storeUserData(user) {
     localStorage.setItem("user", JSON.stringify(user));
 
