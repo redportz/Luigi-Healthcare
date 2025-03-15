@@ -11,12 +11,18 @@
 const myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/json");
 
-const raw = JSON.stringify({
-  "id": 0,
-  "firstName": "newguy",
-  "lastName": "string",
-  "mobile": "string"
-});
+const raw = JSON.stringify(
+  {
+    "firstName": "Eric",
+    "lastName": "Zba",
+    "dateOfBirth": "2025-03-10",
+    "ssn": "123456789",
+    "email": "PatientTest@email.com",
+    "password": "pass123",
+    "role": "Patient"
+}
+
+);
 
 const requestOptions = {
   method: "POST",

@@ -2,7 +2,7 @@
 
 document.getElementById("patient-form").addEventListener("submit", async function(event) {
     event.preventDefault(); // Prevent default form submission
-    const useRealAPI = true;
+    const useRealAPI = false;
     const today=new Date().toISOString().split("T")[0];
 
     const password = document.getElementById("password").value;
@@ -27,10 +27,20 @@ document.getElementById("patient-form").addEventListener("submit", async functio
         ssn: ssn,
         email: document.getElementById("email").value,
         password: password,
-        insuranceName: document.getElementById("insurance-name").value,
-        memberId: document.getElementById("member-id").value,
+        // insuranceName: document.getElementById("insurance-name").value,
+        // memberId: document.getElementById("member-id").value,
         role: "Patient"
     };
+
+    //   {
+//     "firstName": "string",
+//     "lastName": "string",
+//     "dateOfBirth": "2025-03-14T20:26:23.593",
+//     "ssn": "string",
+//     "email": "string",
+//     "password": "string",
+//     "role": "string"
+// //   }
     
     if (new Date(formData.dateOfBirth) >= new Date(today)){
         alert("Please select a date before today.");
