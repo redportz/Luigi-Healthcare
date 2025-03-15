@@ -1,10 +1,9 @@
-// Toggle flag: set to false for simulated mode, true for real API call
+import config from "./config";
 
 document.getElementById("patient-form").addEventListener("submit", async function(event) {
     event.preventDefault(); // Prevent default form submission
     const useRealAPI = false;
     const today=new Date().toISOString().split("T")[0];
-
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirm-password").value;
     const ssn = document.getElementById("ssn").value;
@@ -51,7 +50,7 @@ document.getElementById("patient-form").addEventListener("submit", async functio
     } else {
         // Real API call:
         try {
-            const response = await fetch("https://healthcaredbbackendapi.azure-api.net/api/auth/register", {
+            const response = await fetch(config.API_ENDPOINTS.register, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

@@ -1,7 +1,7 @@
+import config from "./config";
 document.getElementById("login-form").addEventListener("submit", async function(event) {
     event.preventDefault(); // Prevent default form submission
-    // Toggle flag: set to false for simulated login, true for real API call.
-    const useRealAPI=true;
+
     const enteredEmail = document.getElementById("email").value;
     const enteredPassword = document.getElementById("password").value;
     let user=null;
@@ -24,7 +24,7 @@ document.getElementById("login-form").addEventListener("submit", async function(
     }
     else{
         try {
-            const response = await fetch("https://healthcaredbbackendapi.azure-api.net/api/auth/login", {
+            const response = await fetch(config.API_ENDPOINTS.login, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

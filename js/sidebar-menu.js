@@ -26,6 +26,4 @@ function initSidebarMenu() {
   }
 }
 
-// Optionally, if sidebar is loaded synchronously, you can initialize on DOMContentLoaded,
-// but if it's loaded dynamically, you may call initSidebarMenu() from load-sidebar.js.
 document.addEventListener("DOMContentLoaded", initSidebarMenu);
