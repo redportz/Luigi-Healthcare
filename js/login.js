@@ -1,4 +1,4 @@
-import config from "./config";
+import config from "./config.js";
 document.getElementById("login-form").addEventListener("submit", async function(event) {
     event.preventDefault(); // Prevent default form submission
 
@@ -6,7 +6,7 @@ document.getElementById("login-form").addEventListener("submit", async function(
     const enteredPassword = document.getElementById("password").value;
     let user=null;
 
-    if (!useRealAPI) {
+    if (!config.useRealAPI) {
         if (enteredEmail === "AdminTest@email.com" && enteredPassword === "pass123") {
             // Admin test login: simulate user data for an Administrator
             user = { firstName: "Admin", lastName: "Test", role: "Administrator" };

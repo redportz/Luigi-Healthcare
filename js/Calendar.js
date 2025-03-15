@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const config = window.config;
     var calendarEl = document.getElementById("calendar");
 
     var calendar = new FullCalendar.Calendar(calendarEl, {

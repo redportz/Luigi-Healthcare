@@ -2,12 +2,13 @@ const config = {
     useRealAPI: true, 
     useServerBackend: false,
 
+
     get fetchAddress() {
         return this.useServerBackend
-            ? "http://localhost:5115"
-            : "https://healthcaredbbackendapi.azure-api.net";
+            ? "https://healthcaredbbackendapi.azure-api.net" 
+            : "http://localhost:5115";
     },
-
+    
     get API_ENDPOINTS() {
         return {
             login: `${this.fetchAddress}/api/auth/login`,

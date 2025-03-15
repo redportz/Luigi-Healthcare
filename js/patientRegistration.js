@@ -1,8 +1,7 @@
-import config from "./config";
-
+import config from "./config.js";
 document.getElementById("patient-form").addEventListener("submit", async function(event) {
     event.preventDefault(); // Prevent default form submission
-    const useRealAPI = false;
+    const config = window.config;
     const today=new Date().toISOString().split("T")[0];
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirm-password").value;
@@ -43,7 +42,7 @@ document.getElementById("patient-form").addEventListener("submit", async functio
     
     if (new Date(formData.dateOfBirth) >= new Date(today)){
         alert("Please select a date before today.");
-    }else if (!useRealAPI) {
+    }else if (!config.useRealAPI) {
         // Simulated account creation:
         console.log("Simulated account creation. Form data:", formData);
         alert("Account created successfully (simulation)! Check the console for details.");
