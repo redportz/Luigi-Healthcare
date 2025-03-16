@@ -1,0 +1,79 @@
+#outer-container {
+    background-color: var(--menu-bg);
+    color: var(--text-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    width: fit-content;
+    position: relative;
+}
+
+#dropdown-toggle {
+    background-color: var(--button-color);
+    color: var(--text-color);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#dropdown-toggle:hover {
+    background-color: var(--button-hover);
+}
+
+.dropdown-list {
+    background-color: var(--card-bg);
+    color: #333;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 5px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    max-height: 250px;
+    overflow-y: auto;
+    width: 90%;
+    z-index: 10;
+}
+
+.dropdown-list button {
+    background-color: transparent;
+    border: none;
+    color: #333;
+    padding: 8px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.dropdown-list button:hover {
+    background-color: var(--hover-color);
+    border-radius: 3px;
+}
+
+.hidden {
+    display: none;
+}
+
+
+.form-container {
+    width: 60%;
+    height: 60%;
+}
+#message-who{
+    justify-content: normal;
+    height: 50px;
+}
+
+
+/* message box */
+
+#messages-box{
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    border-radius: 15px;
+    color: red;
+}
