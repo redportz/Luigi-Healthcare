@@ -1,0 +1,18 @@
+[
+    {
+        "messageId": 101,
+        "senderId": 1,
+        "receiverId": 2,
+        "messageText": "Hello, Doctor! I need help with my prescription.",
+        "sentAt": "2025-03-15T10:30:00Z",
+        "readAt": null
+    },
+    {
+        "messageId": 102,
+        "senderId": 2,
+        "receiverId": 1,
+        "messageText": "Sure! What seems to be the problem?",
+        "sentAt": "2025-03-15T12:05:00Z",
+        "readAt": null
+    }
+]

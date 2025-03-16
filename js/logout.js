@@ -33,8 +33,8 @@ document.addEventListener("DOMContentLoaded", function() {
     return;
   }
   
-  // If the current page is in the "/admin/" folder but the user's role isn't "Administrator"
-  if (currentPath.includes("/admin/") && user.role !== "Administrator") {
+  // If the current page is in the "/admin/" folder but the user's role isn't "Admin"
+  if (currentPath.includes("/admin/") && user.role !== "Admin") {
     alert("Access Denied: You are not authorized to view this page.");
     window.location.href = "/account-stuff/login-page.html";
     return;

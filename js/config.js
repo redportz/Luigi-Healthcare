@@ -8,13 +8,14 @@ const config = {
             ? "https://healthcaredbbackendapi.azure-api.net" 
             : "http://localhost:5115";
     },
-    
+
     get API_ENDPOINTS() {
         return {
             login: `${this.fetchAddress}/api/auth/login`,
             register: `${this.fetchAddress}/api/auth/register`,
             getUser: `${this.fetchAddress}/api/user/profile`,
             updateUser: `${this.fetchAddress}/api/user/update`,
+            messages: `${this.fetchAddress}/api/messages/`,
         };
     },
 };

@@ -1,12 +1,12 @@
 import config from "./config.js";
+
 document.getElementById("patient-form").addEventListener("submit", async function(event) {
     event.preventDefault(); // Prevent default form submission
-    const config = window.config;
-    const today=new Date().toISOString().split("T")[0];
+
+    const today = new Date().toISOString().split("T")[0];
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirm-password").value;
     const ssn = document.getElementById("ssn").value;
-
 
     if (password !== confirmPassword) {
         alert("Passwords do not match. Please try again.");
@@ -25,35 +25,25 @@ document.getElementById("patient-form").addEventListener("submit", async functio
         ssn: ssn,
         email: document.getElementById("email").value,
         password: password,
-        // insuranceName: document.getElementById("insurance-name").value,
-        // memberId: document.getElementById("member-id").value,
         role: "Patient"
     };
 
-    //   {
-//     "firstName": "string",
-//     "lastName": "string",
-//     "dateOfBirth": "2025-03-14T20:26:23.593",
-//     "ssn": "string",
-//     "email": "string",
-//     "password": "string",
-//     "role": "string"
-// //   }
-    
-    if (new Date(formData.dateOfBirth) >= new Date(today)){
+    if (new Date(formData.dateOfBirth) >= new Date(today)) {
         alert("Please select a date before today.");
-    }else if (!config.useRealAPI) {
-        // Simulated account creation:
+        return;
+    }
+
+    if (!config.useRealAPI) {
         console.log("Simulated account creation. Form data:", formData);
         alert("Account created successfully (simulation)! Check the console for details.");
     } else {
-        // Real API call:
         try {
             const response = await fetch(config.API_ENDPOINTS.register, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
+                
                 body: JSON.stringify(formData)
             });
 
@@ -62,6 +52,7 @@ document.getElementById("patient-form").addEventListener("submit", async functio
                 document.getElementById("patient-form").style.display = "none";
                 document.getElementById("account-created-message").style.display = "flex";
             } else {
+                
                 const errorMessage = await response.text();
                 alert("Error: " + errorMessage);
             }

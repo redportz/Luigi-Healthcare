@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luigi Healthcare - New Message</title>
+    <title>Luigi Healthcare</title>
     <script src="https://kit.fontawesome.com/1ba04f7b66.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/top-bar.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/login-page.css">
     <link rel="stylesheet" href="/css/sidebar-menu.css">
-    <link rel="stylesheet" href="/css/messaging.css"> 
+    <link rel="stylesheet" href="/css/message-page.css">
+    <!-- Add style sheet here -->
 </head>
 <body>
     <header>
@@ -19,37 +21,80 @@
             <p id="Luigi Healthcare">Luigi Healthcare</p>
         </div>
         <div id="right-topbar">
-            <a id="logout-btn" title="Click to log out" href="/account-stuff/login-page.html"><i class="fa-solid fa-right-from-bracket"></i></a>
+            <a id="logout-btn" title="Click to log out" href="/account-stuff/login-page.html">
+                <i class="fa-solid fa-right-from-bracket"></i>
+            </a>
             <button class="menu-btn" aria-label="Open Menu">
                 <i class="fa-solid fa-bars"></i>
               </button>
-        </div>        
-    </header>
-    <!-- sidebar -->
-    <div id="sidebar-container" nav_menu="Patient"></div>
+            </header>
+        </div>
+        <div id="sidebar-container" nav_menu="Patient"></div>
 
     <main>
-        <div class="envelope">
-            <div class="envelope-header">
-                <h2>New Message</h2>
-                <button id="cancel-btn">Cancel</button>
-            </div>
-            <div class="envelope-body">
-                <label for="subject">Subject:</label>
-                <input type="text" id="subject" placeholder="Message Subject">
-                <label for="message">Message:</label>
-                <textarea id="message" placeholder="Type your message here..."></textarea>
-            </div>
-            <div class="envelope-footer">
-                <button id="send-btn">Send to Doctor</button>
-            </div>
+
+        <div id="message-who" class="form-container">
+            <h3>Who would you like to Message?</h3>
+            <ul id="user-list">
+                <li><button onclick="selectChatPartner(24)">Doctor</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+                <li><button onclick="selectChatPartner(25)">Admin</button></li>
+            </ul>
         </div>
+
+
+    <div style="display: none;">
+        <h3>Messages</h3>
+        <ul id="message-list"></ul>
+        
+        <form id="send-message-form">
+            <label for="message-text">Message:</label>
+            <input type="text" id="message-text" required>
+            <button type="submit">Send</button>
+        </form>
+        
+        <button id="load-more">Load Older Messages</button>
+        
+    </div>
     </main>
-    <a href="/feedback/feedback.html"></a>
-    <script type="module" src="/js/config.js"></script>
-    <script src="/js/logout.js"></script>
     <script src="/js/load-sidebar.js"></script>
+    <script type="module" src="/js/logout.js"></script>
+    <script type="module" src="/js/messages.js"></script>
     <script src="/js/sidebar-menu.js"></script>
-    <!-- <script src="/js/logout.js"></script> --> <!---->
 </body>
 </html>
+

@@ -10,12 +10,15 @@ document.getElementById("login-form").addEventListener("submit", async function(
         if (enteredEmail === "AdminTest@email.com" && enteredPassword === "pass123") {
             // Admin test login: simulate user data for an Administrator
             user = { firstName: "Admin", lastName: "Test", role: "Administrator" };
+            localStorage.setItem("userId", 1);
         } else if (enteredEmail === "DoctorTest@email.com" && enteredPassword === "pass123") {
             // Doctor test login: simulate user data for a Doctor
             user = { firstName: "Doctor", lastName: "Test", role: "Doctor" };
+            localStorage.setItem("userId", 2);
         } else if (enteredEmail === "PatientTest@email.com" && enteredPassword === "pass123") {
             // Patient test login: simulate user data for a Patient
             user = { firstName: "Patient", lastName: "Test", SSN: "123456789", role: "Patient" };
+            localStorage.setItem("userId", 3);
         } else {
             alert("Login failed. Please try again.");
             return; 
@@ -36,7 +39,7 @@ document.getElementById("login-form").addEventListener("submit", async function(
                 const result = await response.json();
                 console.log("Real API Login Successful:", result);
 
-
+                localStorage.setItem("userId", result.userId);
                 handleLoginSuccess(result); 
             } else {
                 throw new Error(await response.text()); 
@@ -61,7 +64,7 @@ function handleLoginSuccess(user) {
         case "Doctor":
             window.location.href = "../Doctor/Dashboard.html";
             break;
-        case "Administrator":
+        case "Admin":
             window.location.href = "../admin/Dashboard.html";
             break;
         default:
