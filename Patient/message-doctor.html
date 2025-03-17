@@ -4,29 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Messages</title>
-
+</head>
+<body>
     <h3>Select a Chat Partner</h3>
 <ul id="user-list">
     <li><button onclick="selectChatPartner(1)">Chat with User 1</button></li>
     <li><button onclick="selectChatPartner(24)">Chat with User 24</button></li>
     <li><button onclick="selectChatPartner(25)">Chat with User 25</button></li>
+    <li><button onclick="selectChatPartner(2)">Chat with User 25</button></li>
 </ul>
 
 <h3>Messages</h3>
-<ul id="message-list"></ul>
+
 
 <form id="send-message-form">
     <label for="message-text">Message:</label>
     <input type="text" id="message-text" required>
     <button type="submit">Send</button>
 </form>
-
+<ul id="message-list"></ul>
 <button id="load-more">Load Older Messages</button>
 
-    <script src="/js/messages.js" defer></script>
-</head>
-<body>
     <h1>Messages</h1>
     <ul id="message-list"></ul>
+    <script src="/js/messages.js" defer></script>
 </body>
 </html>

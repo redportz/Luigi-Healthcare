@@ -10,9 +10,17 @@ let pageNumber = 1;
 const pageSize = 10;
 const apiBaseUrl = "http://localhost:5115/api/messages";
 const displayedMessageIds = new Set(); // ✅ Prevent duplicate messages
+let isLoading=false;
 
-// ✅ Load messages between logged-in user and selected chat partner
+// Load messages between logged-in user and selected chat partner
 async function loadMessages() {
+
+    if (isLoading) {
+        return; // Prevent further requests if one is already in progress
+    }
+
+    isLoading = true
+
     if (!chatWithUserId) {
         alert("Please select a chat partner first!");
         return;
@@ -22,6 +30,8 @@ async function loadMessages() {
         console.log(`📩 Fetching messages between user ${userId} and ${chatWithUserId}, page ${pageNumber}`);
 
         const response = await fetch(`${apiBaseUrl}/chat/${userId}/${chatWithUserId}/${pageNumber}/${pageSize}`);
+
+
         const messages = await response.json();
 
         if (messages.length === 0) {
@@ -30,33 +40,35 @@ async function loadMessages() {
                 document.getElementById("message-list").innerHTML = "<p>No messages yet.</p>";
             }
             document.getElementById("load-more").style.display = "none";
+            isLoading = false;
             return;
         }
 
         displayMessages(messages);
-        pageNumber++; // ✅ Load next page on button click
+        pageNumber++; // Load next page on button click
 
-        // ✅ Hide "Load More" if we get fewer messages than pageSize
+        // Hide "Load More" if we get fewer messages than pageSize
         if (messages.length < pageSize) {
             document.getElementById("load-more").style.display = "none";
+        } else{
+            document.getElementById("load-more").style.display ="block"
         }
     } catch (error) {
         console.error("Error loading messages:", error);
     }
+    isLoading = false;
 }
 
-// ✅ Display messages in the list
+// Display messages in the list
 function displayMessages(messages) {
     const messageList = document.getElementById("message-list");
 
     messages.forEach(msg => {
-        if (!displayedMessageIds.has(msg.messageId)) { // ✅ Prevent duplicates
             displayedMessageIds.add(msg.messageId);
 
             const listItem = document.createElement("li");
             listItem.textContent = `[${msg.sentAt}] From ${msg.senderId}: ${msg.messageText}`;
             messageList.appendChild(listItem);
-        }
     });
 
     // ✅ Scroll to bottom for the newest message
@@ -66,8 +78,8 @@ function displayMessages(messages) {
 // ✅ Set chat partner and load messages
 function selectChatPartner(otherUserId) {
     chatWithUserId = otherUserId;
-    pageNumber = 1; // Reset page number for new conversation
-    displayedMessageIds.clear(); // Clear previous messages
+    pageNumber = 1; 
+    displayedMessageIds.clear();
     document.getElementById("message-list").innerHTML = ""; // Clear UI
     loadMessages();
 }
