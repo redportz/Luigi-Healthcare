@@ -1,6 +1,7 @@
 # Luigi-Healthcare
 # Group Number: 4
-# Authors: Matthew Walker, 
+# Authors: Matthew Walker,
+#Eric Zabala
 
 
 # Getting Started
