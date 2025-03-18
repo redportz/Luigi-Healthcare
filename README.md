@@ -1,7 +1,14 @@
 # Luigi-Healthcare
-# Group Number: 4
-# Authors: Matthew Walker,
-#Eric Zabala
+
+## Group Number: 4
+
+### Authors:
+- Matthew Walker
+- Eric Zabala
+- Jacob Carter
+- Justin Cornell
+- Raad Darwish
+- Cade Parlato
 
 
 # Getting Started
