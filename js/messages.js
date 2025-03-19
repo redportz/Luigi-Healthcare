@@ -98,7 +98,7 @@ function displayRecipientName(information) {
     }
 
 
-// ✅ Set chat partner and load messages
+// Set chat partner and load messages
 function selectChatPartner(otherUserId) {
     chatWithUserId = otherUserId;
     pageNumber = 1; 
@@ -109,7 +109,7 @@ function selectChatPartner(otherUserId) {
 }
 window.selectChatPartner = selectChatPartner;
 
-// ✅ Send a message
+// Send a message
 document.getElementById("send-message-form").addEventListener("submit", async function(event) {
     event.preventDefault(); // Prevent page refresh
 

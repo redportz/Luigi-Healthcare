@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luigi Healthcare</title>
+    <script src="https://kit.fontawesome.com/1ba04f7b66.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/top-bar.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/sidebar-menu.css">
+    <!-- Add style sheet here -->
+</head>
+<body>
+    <header>
+        <div id="left-topbar">
+            <a id="healthcare-icon"><img src="/images/Logo.png" alt="Luigi's Healthcare Logo"></a>
+        </div>
+        <div id="middle-topbar">
+            <p id="Luigi Healthcare">Luigi Healthcare</p>
+        </div>
+        <div id="right-topbar">
+            <a id="logout-btn" title="Click to log out" href="/account-stuff/login-page.html">
+                <i class="fa-solid fa-right-from-bracket"></i>
+            </a>
+            <button class="menu-btn" aria-label="Open Menu">
+                <i class="fa-solid fa-bars"></i>
+              </button>
+            </header>
+        </div>
+        <!-- sidebar -->
+         <!-- change nav_menu based upon what menu you want:
+          Patient
+          Admin
+          Doctor
+           -->
+        <div id="sidebar-container" nav_menu="Doctor"></div>
+
+    <main>
+        <div id="doctor-dashboard">
+            <h2>Doctor Prescription Management</h2>
+        
+            <!-- Search for a patient's prescriptions -->
+            <label for="patientId">Patient ID:</label>
+            <input type="number" id="patientId" placeholder="Enter patient ID">
+            <button onclick="fetchPrescriptions()">Search</button>
+        
+            <!-- List of Prescriptions -->
+            <div id="prescriptions-list"></div>
+        
+            <!-- Prescription Form (Add/Edit) -->
+            <h3 id="form-title">Add Prescription</h3>
+            <form id="prescription-form">
+                <input type="hidden" id="prescriptionId"> <!-- Hidden input for editing -->
+                <label>Name:</label> <input type="text" id="name" required>
+                <label>Dosage:</label> <input type="text" id="dosage" required>
+                <label>Frequency:</label> <input type="text" id="frequency" required>
+                <label>Strength (mg):</label> <input type="number" id="milligrams" required>
+                <label>Refills Left:</label> <input type="number" id="refills" required>
+                <label>Doctor:</label> <input type="text" id="doctor" required>
+                <label>Phone:</label> <input type="text" id="phone" required>
+                <label>Reason:</label> <input type="text" id="reason" required>
+                <button type="submit">Save Prescription</button>
+            </form>
+        </div>
+        
+        <!-- Your page content goes here -->
+    </main>
+    <!-- <script type="module" src="config.js"></script> -->
+    <script src="/js/load-sidebar.js"></script>
+    <script type="module" src="/js/logout.js"></script>
+    <script src="/js/sidebar-menu.js"></script>
+    <script type="module" src="/js/drPrescriptions.js"></script>
+</body>
+</html>
