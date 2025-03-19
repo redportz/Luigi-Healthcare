@@ -157,3 +157,9 @@ form {
     margin: 10px;
     justify-self: center;
 }
+
+#chat-header{
+    justify-self: center;
+    font-size: 35px;
+    margin: 5px;
+}

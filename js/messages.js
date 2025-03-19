@@ -1,6 +1,6 @@
 import config from "./config.js";
 
-const userId = parseInt(localStorage.getItem("userId")); // ✅ Ensure userId is a number
+const userId = parseInt(localStorage.getItem("userId")); // Ensure userId is a number
 
 if (!userId) {
     alert("User not logged in!");
@@ -45,8 +45,9 @@ async function loadMessages() {
         );
     }
 
+    
     if (pageNumber === 1 && config.useRealAPI) {
-        displayRecipientLastName(information.receiverLastName);
+        displayRecipientName(information);
     }    
         
         displayMessages(information.messages);
@@ -92,8 +93,8 @@ function displayMessages(messages) {
         messageList.appendChild(listItem);
     });
 }
-function displayRecipientLastName(receiverLastName) {
-        document.getElementById("chat-header").textContent = `Messages with ${receiverLastName}`;
+function displayRecipientName(information) {
+        document.getElementById("chat-header").textContent = `${information.chatting_with_LastName} ${information.chatting_with_FirstName} (${information.chatting_with_Role})`;
     }
 
 
@@ -153,6 +154,10 @@ document.getElementById("send-message-form").addEventListener("submit", async fu
         console.error("Error sending message:", error);
     }
 });
+
+function getPeople(params) {
+    
+}
 
 // ✅ Load more messages when button is clicked
 document.getElementById("load-more").addEventListener("click", loadMessages);
