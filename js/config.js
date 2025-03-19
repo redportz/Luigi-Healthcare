@@ -2,7 +2,6 @@ const config = {
     useRealAPI: true, 
     useServerBackend: false,
 
-
     get fetchAddress() {
         return this.useServerBackend
             ? "https://healthcaredbbackendapi.azure-api.net" 
@@ -10,14 +9,22 @@ const config = {
     },
 
     get API_ENDPOINTS() {
-        return {
+        return this.useRealAPI ? {  
             login: `${this.fetchAddress}/api/auth/login`,
             register: `${this.fetchAddress}/api/auth/register`,
             getUser: `${this.fetchAddress}/api/user/profile`,
             updateUser: `${this.fetchAddress}/api/user/update`,
-            messages: `${this.fetchAddress}/api/messages/`,
+            messagesBase: `${this.fetchAddress}/api/messages`,
+            send: `${this.fetchAddress}/api/messages/send`, 
+        } : {  
+            login: "/json/accounts.json",
+            register: "/json/accounts.json",
+            getUser: "/json/accounts.json",
+            updateUser: "/json/accounts.json",
+            messagesBase: "/json/messages.json", 
+            send: "/json/messages.json", 
         };
-    },
+    }
 };
 
 export default config;

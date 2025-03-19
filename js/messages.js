@@ -1,15 +1,16 @@
+import config from "./config.js";
+
 const userId = parseInt(localStorage.getItem("userId")); // ✅ Ensure userId is a number
 
 if (!userId) {
     alert("User not logged in!");
-    window.location.href = "login.html"; // Redirect to login if no user ID found
+    window.location.href = "/account-stuff/login-page.html"; // Redirect to login if no user ID found
 }
 
 let chatWithUserId = null; // User that we are chatting with
 let pageNumber = 1;
 const pageSize = 10;
-const apiBaseUrl = "http://localhost:5115/api/messages";
-const displayedMessageIds = new Set(); // ✅ Prevent duplicate messages
+const displayedMessageIds = new Set(); 
 let isLoading=false;
 
 // Load messages between logged-in user and selected chat partner
@@ -29,30 +30,38 @@ async function loadMessages() {
     try {
         console.log(`📩 Fetching messages between user ${userId} and ${chatWithUserId}, page ${pageNumber}`);
 
-        const response = await fetch(`${apiBaseUrl}/chat/${userId}/${chatWithUserId}/${pageNumber}/${pageSize}`);
+        const apiUrl = config.useRealAPI 
+        ? `${config.API_ENDPOINTS.messagesBase}/chat/${userId}/${chatWithUserId}/${pageNumber}/${pageSize}`
+        : config.API_ENDPOINTS.messagesBase; // JSON file
+    
+    const response = await fetch(apiUrl);
+    let information = await response.json();
+    
+    // If using JSON, filter messages manually
+    if (!config.useRealAPI) {
+        information = information.filter(msg =>
+            (msg.senderId === userId && msg.receiverId === chatWithUserId) ||
+            (msg.senderId === chatWithUserId && msg.receiverId === userId)
+        );
+    }
 
-
-        const messages = await response.json();
-
-        if (messages.length === 0) {
-            console.warn("No new messages found.");
-            if (pageNumber === 1) {
-                document.getElementById("message-list").innerHTML = "<p>No messages yet.</p>";
-            }
-            document.getElementById("load-more").style.display = "none";
-            isLoading = false;
-            return;
-        }
-
-        displayMessages(messages);
+    if (pageNumber === 1 && config.useRealAPI) {
+        displayRecipientLastName(information.receiverLastName);
+    }    
+        
+        displayMessages(information.messages);
         pageNumber++; // Load next page on button click
-
+    if (!config.useRealAPI) {
+        document.getElementById("load-more").style.display = "none";
+    } else {
+        
         // Hide "Load More" if we get fewer messages than pageSize
-        if (messages.length < pageSize) {
+        if (information.messages.length < pageSize) {
             document.getElementById("load-more").style.display = "none";
         } else{
             document.getElementById("load-more").style.display ="block"
         }
+    }
     } catch (error) {
         console.error("Error loading messages:", error);
     }
@@ -62,27 +71,42 @@ async function loadMessages() {
 // Display messages in the list
 function displayMessages(messages) {
     const messageList = document.getElementById("message-list");
+   
 
     messages.forEach(msg => {
-            displayedMessageIds.add(msg.messageId);
+        if (displayedMessageIds.has(msg.messageId)) {
+            return; // Prevent duplicate messages
+        }
+        displayedMessageIds.add(msg.messageId);
+        
+        const listItem = document.createElement("li");
+        listItem.innerHTML = `[${msg.sentAt}] <br> ${msg.messageText}`;
+        
+        // Add class based on sender
+        if (msg.senderId === userId) {
+            listItem.classList.add("sender");
+        } else {
+            listItem.classList.add("receiver");
+        }
 
-            const listItem = document.createElement("li");
-            listItem.textContent = `[${msg.sentAt}] From ${msg.senderId}: ${msg.messageText}`;
-            messageList.appendChild(listItem);
+        messageList.appendChild(listItem);
     });
-
-    // ✅ Scroll to bottom for the newest message
-    messageList.scrollTop = messageList.scrollHeight;
 }
+function displayRecipientLastName(receiverLastName) {
+        document.getElementById("chat-header").textContent = `Messages with ${receiverLastName}`;
+    }
+
 
 // ✅ Set chat partner and load messages
 function selectChatPartner(otherUserId) {
     chatWithUserId = otherUserId;
     pageNumber = 1; 
     displayedMessageIds.clear();
+    document.getElementById('message-container').classList.remove('hidden');
     document.getElementById("message-list").innerHTML = ""; // Clear UI
     loadMessages();
 }
+window.selectChatPartner = selectChatPartner;
 
 // ✅ Send a message
 document.getElementById("send-message-form").addEventListener("submit", async function(event) {
@@ -101,22 +125,27 @@ document.getElementById("send-message-form").addEventListener("submit", async fu
     }
 
     const messageData = {
-        senderId: userId,  // ✅ Use logged-in user's ID
+        senderId: userId,  // Use logged-in user's ID
         receiverId: chatWithUserId,
         messageText: messageText
     };
+    // add sending message box
 
     try {
-        const response = await fetch(`${apiBaseUrl}/send`, {
+        const response = await fetch(config.API_ENDPOINTS.send, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(messageData)
         });
 
         if (response.ok) {
-            alert("Message sent!");
+            // close sendign message box
+            // add message sent box
             document.getElementById("message-text").value = ""; // ✅ Clear input
-            loadMessages(); // ✅ Reload messages after sending
+            pageNumber = 1; 
+            displayedMessageIds.clear();
+            document.getElementById("message-list").innerHTML = ""; // Clear UI
+            loadMessages();
         } else {
             alert("Error sending message.");
         }

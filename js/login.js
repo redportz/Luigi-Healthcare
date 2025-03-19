@@ -7,24 +7,23 @@ document.getElementById("login-form").addEventListener("submit", async function(
     let user=null;
 
     if (!config.useRealAPI) {
-        if (enteredEmail === "AdminTest@email.com" && enteredPassword === "pass123") {
-            // Admin test login: simulate user data for an Administrator
-            user = { firstName: "Admin", lastName: "Test", role: "Administrator" };
-            localStorage.setItem("userId", 1);
-        } else if (enteredEmail === "DoctorTest@email.com" && enteredPassword === "pass123") {
-            // Doctor test login: simulate user data for a Doctor
-            user = { firstName: "Doctor", lastName: "Test", role: "Doctor" };
-            localStorage.setItem("userId", 2);
-        } else if (enteredEmail === "PatientTest@email.com" && enteredPassword === "pass123") {
-            // Patient test login: simulate user data for a Patient
-            user = { firstName: "Patient", lastName: "Test", SSN: "123456789", role: "Patient" };
-            localStorage.setItem("userId", 3);
-        } else {
+        const users = [
+            { UserId: 25, FirstName: "Admin", LastName: "Test", DateOfBirth: "1990-01-01T00:00:00", SSN: "987654321", Email: "AdminTest@email.com", Password: "pass123", role: "Administrator" },
+            { UserId: 24, FirstName: "Doctor", LastName: "Test", DateOfBirth: "1980-01-01T00:00:00", SSN: "123456789", Email: "DoctorTest@email.com", Password: "pass123", role: "Doctor" },
+            { UserId: 21, FirstName: "Eric", LastName: "Zba", DateOfBirth: "2025-03-04T00:00:00", SSN: "654654564", Email: "PatientTest@email.com", Password: "pass123", role: "Patient" }
+        ];
+    
+        const user = users.find(u => u.Email === enteredEmail && u.Password === enteredPassword);
+    
+        if (!user) {
             alert("Login failed. Please try again.");
-            return; 
+            return;
         }
-        handleLoginSuccess(user)
+    
+        localStorage.setItem("userId", user.UserId);
+        handleLoginSuccess(user);
     }
+    
     else{
         try {
             const response = await fetch(config.API_ENDPOINTS.login, {
