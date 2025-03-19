@@ -17,6 +17,7 @@ const config = {
             messagesBase: `${this.fetchAddress}/api/messages`,
             send: `${this.fetchAddress}/api/messages/send`, 
             message_buttons: `${this.fetchAddress}/UserInfo/GetAll`, 
+            prescriptions: `${this.fetchAddress}/api/prescriptions`, 
         } : {  
             login: "/json/accounts.json",
             register: "/json/accounts.json",
@@ -24,7 +25,8 @@ const config = {
             updateUser: "/json/accounts.json",
             messagesBase: "/json/messages.json", 
             send: "/json/messages.json",
-            message_buttons: "/json/accounts.json"
+            message_buttons: "/json/accounts.json",
+            prescriptions: "/json/accounts.json"
         };
     }
 };

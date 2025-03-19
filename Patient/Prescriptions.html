@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luigi Healthcare</title>
     <script src="https://kit.fontawesome.com/1ba04f7b66.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/top-bar.css">
-    <link rel="stylesheet" href="/css/login-page.css">
+    <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/sidebar-menu.css">
+    <link rel="stylesheet" href="/css/prescription.css">
     <!-- Add style sheet here -->
 </head>
 <body>
@@ -27,19 +27,26 @@
                 <i class="fa-solid fa-bars"></i>
               </button>
             </header>
-        </div>        
-    </header>
-    <!-- sidebar -->
-    <div id="sidebar-container" nav_menu="Patient"></div>
+        </div>
+        <div id="sidebar-container" nav_menu="Patient"></div>
 
-    <main>
-        <!-- Your page content goes here -->
-        Prescriptions
-    </main>
+        <main>
+                <div id="prescription-box">
 
-    <script src="/js/config.js"></script>
+                    <div id="Prescription-display"> <!-- ✅ This should match JavaScript -->
+                        <!-- Prescriptions will be added here dynamically -->
+                    </div>
+                    
+                    <div class="prescription-container" id="prescription-container" style="display: none;" > 
+                        <!-- ✅ This will display prescription details -->
+                    </div>
+                    
+                </div>
+        </main>
+    <!-- <script type="module" src="config.js"></script> -->
     <script src="/js/load-sidebar.js"></script>
-    <script src="/js/logout.js"></script>
+    <script type="module" src="/js/logout.js"></script>
     <script src="/js/sidebar-menu.js"></script>
+    <script type="module" src="/js/prescriptions.js"></script>
 </body>
 </html>
