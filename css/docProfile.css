@@ -8,12 +8,12 @@ body {
     box-sizing: border-box;
   }
   
-  /* wrapper to center green box */
+  /* center green box */
   .content-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 70px); /* adjust if you have a top bar */
+    height: calc(100vh - 70px); 
     padding: 20px;
   }
   
