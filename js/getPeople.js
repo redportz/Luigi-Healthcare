@@ -4,7 +4,7 @@ const userId = parseInt(localStorage.getItem("userId"));
 
 async function fetchUsers() {
     try {
-        const response = await fetch(config.API_ENDPOINTS.message_buttons);
+        const response = await fetch(`${config.API_ENDPOINTS.message_buttons}?currentUserId=${userId}`);
         if (!response.ok) throw new Error('Failed to fetch users');
 
         const users = await response.json();
@@ -17,7 +17,12 @@ async function fetchUsers() {
                 const listItem = document.createElement('li');
                 const button = document.createElement('button');
 
-                button.textContent = `${user.firstName} ${user.lastName} (${user.role})`;
+                if (user.role === "Doctor" && user.specialty) {
+                    button.textContent = `${user.firstName} ${user.lastName} (${user.role} - ${user.specialty})`;
+                } else {
+                    button.textContent = `${user.firstName} ${user.lastName} (${user.role})`;
+                }
+                
                 button.setAttribute('onclick', `selectChatPartner(${user.userId})`);
 
                 listItem.appendChild(button);

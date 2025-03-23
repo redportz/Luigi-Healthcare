@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/top-bar.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/sidebar-menu.css">
+
     <!-- Add style sheet here -->
 </head>
 <body>
@@ -44,6 +45,10 @@
             <input type="number" id="patientId" placeholder="Enter patient ID">
             <button onclick="fetchPrescriptions()">Search</button>
         
+            <div id="no-prescriptions" style="display: none;">
+                <h1>No prescriptions found</h1>
+            </div>
+
             <!-- List of Prescriptions -->
             <div id="prescriptions-list"></div>
         

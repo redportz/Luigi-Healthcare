@@ -94,8 +94,18 @@ function displayMessages(messages) {
     });
 }
 function displayRecipientName(information) {
-        document.getElementById("chat-header").textContent = `${information.chatting_with_LastName} ${information.chatting_with_FirstName} (${information.chatting_with_Role})`;
+    let roleDisplay = information.chatting_with_Role;
+    if (roleDisplay === "Doctor" && information.chatting_with_Specialty) {
+        roleDisplay = `Doctor - ${information.chatting_with_Specialty}`;
+        document.getElementById("chat-header").innerHTML = 
+        `${information.chatting_with_LastName} ${information.chatting_with_FirstName}<br>(${roleDisplay})`;
+    }else{
+        document.getElementById("chat-header").textContent = 
+            `${information.chatting_with_LastName} ${information.chatting_with_FirstName} (${roleDisplay})`;
     }
+
+}
+
 
 
 // Set chat partner and load messages

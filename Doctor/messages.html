@@ -31,7 +31,7 @@
               </button>
             </header>
         </div>
-        <div id="sidebar-container" nav_menu="Patient"></div>
+        <div id="sidebar-container" nav_menu="Doctor"></div>
 
     <main>
         <div id="outer-container">
@@ -39,24 +39,19 @@
         <div id="message-who" class="form-container">
             <h3>Who would you like to Message?</h3>
             <button id="dropdown-toggle">Select Recipient ▼</button>
-            <ul id="user-list" class="dropdown-list hidden">
-                <li><button onclick="selectChatPartner(24)">Doctor</button></li>
-                <li><button onclick="selectChatPartner(25)">Admin</button></li>
-                <li><button onclick="selectChatPartner(21)">Patient</button></li>
-                <li><button onclick="selectChatPartner(15)">none</button></li>
-            </ul>
+            <ul id="user-list" class="dropdown-list hidden"></ul>
         </div>
 
 
     <div id="message-container" class="hidden">
         <button >Back</button>
-        <h3>Messages</h3>
+        <h3 id="chat-header">Messages</h3>
         
         <form id="send-message-form">
-            <label for="message-text">Message:</label>
             <input type="text" id="message-text" required>
             <button type="submit">Send</button>
         </form>
+        
         <div id="message-box">
             <ul id="message-list"></ul>
         </div>
@@ -76,7 +71,7 @@
              </div>
 </div>
         </main>
-        <!-- <script type="module" src="config.js"></script> -->
+        <script type="module" src="/js/getPeople.js"></script>
     <script type="module" src="/js/messages.js" defer></script>
     <script src="/js/load-sidebar.js"></script>
     <script type="module" src="/js/logout.js"></script>

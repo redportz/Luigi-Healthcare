@@ -11,10 +11,14 @@ function fetchPrescriptions() {
         .then(data => {
             const list = document.getElementById("prescriptions-list");
             list.innerHTML = "";
-console.log(data);
 
-            data.prescriptions.forEach(prescription => {
-                list.innerHTML += `
+            if (data.prescriptions.length===0) {
+                list.innerHTML = "";
+                document.getElementById("no-prescriptions").style.display = "block";
+            } else {
+                document.getElementById("no-prescriptions").style.display = "none";
+                data.prescriptions.forEach(prescription => {
+                    list.innerHTML += `
                     <div class="prescription-item">
                         <h3>${prescription.name}</h3>
                         <p>Dosage: ${prescription.dosage}</p>
@@ -24,11 +28,12 @@ console.log(data);
                         <p>Reason: ${prescription.reason}<p>
                         <button onclick="editPrescription(${prescription.id})">Edit</button>
                         <button onclick="deletePrescription(${prescription.id})">Delete</button>
-                    </div>
-                `;
-            });
-        })
-        .catch(error => console.error("Error loading prescriptions:", error));
+                        </div>
+                        `;
+                    });
+                }
+                })
+                .catch(error => console.error("Error loading prescriptions:", error));
 }
 
 window.fetchPrescriptions= fetchPrescriptions;
@@ -89,3 +94,4 @@ function deletePrescription(id) {
     })
     .then(() => fetchPrescriptions());
 }
+window.deletePrescription=deletePrescription
