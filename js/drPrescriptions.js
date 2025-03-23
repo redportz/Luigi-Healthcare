@@ -7,39 +7,62 @@ function fetchPrescriptions() {
     const patientId = document.getElementById("patientId").value;
 
     fetch(`${config.API_ENDPOINTS.prescriptions}?userId=${patientId}`)
-        .then(response => response.json())
-        .then(data => {
+        .then(async response => {
             const list = document.getElementById("prescriptions-list");
+            const userInfo = document.getElementById("User-info-display")
+            
             list.innerHTML = "";
+            userInfo.innerHTML = "";
+            document.getElementById("no-prescriptions").style.display = "none";
 
-            if (data.prescriptions.length===0) {
-                list.innerHTML = "";
+            if (!response.ok) {
+                const errorText = await response.text(); // Catch non-JSON error
+                console.error("Error:", errorText);
+                userInfo.innerHTML = `<h3 style="color:red;">${errorText}</h3>`;
+                document.getElementById("add-prescription-btn").style.display = "none";
+                return;
+            }
+            
+            const data = await response.json();
+            console.log(data);
+            console.log(data.user);
+            
+            userInfo.innerHTML += `
+                    <h3>${data.user.firstName} ${data.user.lastName}</h3>
+                `;
+            document.getElementById("add-prescription-btn").style.display = "block";
+
+            if (data.prescriptions.length === 0) {
                 document.getElementById("no-prescriptions").style.display = "block";
-            } else {
-                document.getElementById("no-prescriptions").style.display = "none";
-                data.prescriptions.forEach(prescription => {
-                    list.innerHTML += `
+                return;
+            }
+
+            data.prescriptions.forEach(prescription => {
+                list.innerHTML += `
                     <div class="prescription-item">
                         <h3>${prescription.name}</h3>
                         <p>Dosage: ${prescription.dosage}</p>
                         <p>Refills Left: ${prescription.refills}</p>
-                        <p>Strength (mg): ${prescription.milligrams}<p>
-                        <p>Frequency: ${prescription.frequency}<p>
-                        <p>Reason: ${prescription.reason}<p>
+                        <p>Strength (mg): ${prescription.milligrams}</p>
+                        <p>Frequency: ${prescription.frequency}</p>
+                        <p>Reason: ${prescription.reason}</p>
                         <button onclick="editPrescription(${prescription.id})">Edit</button>
                         <button onclick="deletePrescription(${prescription.id})">Delete</button>
-                        </div>
-                        `;
-                    });
-                }
-                })
-                .catch(error => console.error("Error loading prescriptions:", error));
+                    </div>
+                `;
+            });
+        })
+        .catch(error => {
+            console.error("Error loading prescriptions:", error);
+        });
 }
+
 
 window.fetchPrescriptions= fetchPrescriptions;
 
 // Populate the form with prescription data for editing
 function editPrescription(id) {
+    addPrescriptionSection()
     fetch(`${config.API_ENDPOINTS.prescriptions}/${id}`)
         .then(response => response.json())
         .then(prescription => {
@@ -53,9 +76,19 @@ function editPrescription(id) {
             document.getElementById("phone").value = prescription.phone;
             document.getElementById("reason").value = prescription.reason;
         });
+
 }
 
 window.editPrescription= editPrescription;
+
+
+function addPrescriptionSection(){
+    console.log("this ran");
+    
+    document.getElementById("add-prescription-btn").classList.toggle('hidden');
+    document.getElementById("add-prescription").classList.toggle('hidden');
+}
+window.addPrescriptionSection= addPrescriptionSection;
 
 // Handle form submission (Add or Update)
 document.getElementById("prescription-form").addEventListener("submit", (event) => {
@@ -84,6 +117,7 @@ document.getElementById("prescription-form").addEventListener("submit", (event) 
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(prescriptionData)
     })
+
     .then(() => fetchPrescriptions());
 });
 
