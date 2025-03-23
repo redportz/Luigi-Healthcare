@@ -35,36 +35,32 @@
   <div id="sidebar-container" nav_menu="Doctor"></div>
 
   <!-- main content -->
-<div class="content-wrapper">
+
+  <div class="content-wrapper">
     <div class="main-container">
+      <div class="twofactor-box">
+        <h2 style="text-align: center; margin-top: 10px; font-size: 30px;">
+          <u>Two Factor Authentication has been set up</u>
+        </h2>
+        <h3 style="text-align: center; margin-top: 10px; font-size: 30px;">
+          <u>Congratulations!</u>
+        </h3>
   
-      
-      <div class="account-box">
-        <a href="/Doctor/docProfile.html" class="back-btn">← Back</a>
-  
-        <h2>Enter email</h2>
-  
-        <form action="/Doctor/twofactor2.html" method="GET">
-
-        <input type="email" placeholder="example@email.com" required />
-        <br />
-        <button class="red-btn">Continue</button>
-        </form>
-
-
-
+        <h3 style="text-align: center; margin-top: 10px; font-size: 60px;">
+          <form action="/Doctor/docProfile.html">
+            <button class="red-btn" type="submit">Continue</button>
+          </form>
+        </div>
       </div>
-  
     </div>
   </div>
+  
+
+
+
+
+
    
-
-
-
-
-
-
-
 
   <script src="/js/load-sidebar.js"></script>
   <script type="module" src="/js/logout.js"></script>
@@ -72,3 +68,5 @@
   <script type="module" src="/js/drPrescriptions.js"></script>
 </body>
 </html>
+
+
