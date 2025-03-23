@@ -16,7 +16,7 @@
   text-align: center;
 }
 
-/* White account box */
+/* account box */
 .account-box {
   background-color: rgb(10, 95, 124);
   border-radius: 15px;
@@ -25,14 +25,14 @@
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Heading */
+
 .account-box h2 {
   color: #520909;
   text-decoration: underline;
   margin-bottom: 25px;
 }
 
-/* Email input */
+/* email input */
 .account-box input[type="email"] {
   width: 100%;
   max-width: 500px;
@@ -59,7 +59,7 @@
   background-color: #ff0033;
 }
 
-/* Back button inside white box */
+/* back button */
 .back-btn {
   position: absolute;
   top: 15px;
