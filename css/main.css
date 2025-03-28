@@ -36,3 +36,7 @@ main{
 #test-button{
     position: absolute;
 }
+
+button{
+    cursor: pointer;
+}

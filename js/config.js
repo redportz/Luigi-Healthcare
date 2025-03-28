@@ -7,7 +7,7 @@ const config = {
             ? "https://healthcaredbbackendapi.azure-api.net" 
             : "http://localhost:5114";
     },
-
+    
     get API_ENDPOINTS() {
         return this.useRealAPI ? {  
             login: `${this.fetchAddress}/api/auth/login`,
