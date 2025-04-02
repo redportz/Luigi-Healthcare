@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Luigi Healthcare</title>
     <script src="https://kit.fontawesome.com/1ba04f7b66.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/@geoapify/geocoder-autocomplete/styles/minimal.css">
     <link rel="stylesheet" href="/css/top-bar.css" />
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/sidebar-menu.css" />
@@ -56,20 +57,32 @@
 
                   <p><strong>Email Address:</strong><br>
                     <span id="email"></span></p>
-            
-              <form>
-               
-                <label for="phone"><strong>Phone Number:</strong></label><br>
-                <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
-  
-                <label for="address"><strong>Mailing Address:</strong></label><br>
-                <textarea id="address" name="address" rows="3"></textarea><br><br>
-  
-  
-                <button type="submit" class="edit-btn">Save Changes</button>
-              </form>
-            </div>
-  
+
+                    <div id="phone-and-address-container">
+                      <label for="address-display"><strong>Mailing Address:</strong></label><br>
+                      <span id="address-display"></span>
+                    
+                      <p><strong>Phone Number:</strong><br>
+                        <span id="phoneNumber-display"></span>
+                      </p>
+                    
+                      <button id="edit-info-btn" class="button">Edit Information</button>
+                    </div>
+                    
+                    <div id="edit-container" class="hidden">
+                      <form id="edit-form">
+                        <label for="autocomplete-input"><Strong>Mailing Address:</Strong></label><br>
+                        <input id="autocomplete-input" type="text" autocomplete="off">
+                        <ul id="suggestions-list" style="list-style: none; padding-left: 0;"></ul>
+                    
+                        <label for="phone"><strong>Phone Number:</strong></label><br>
+                        <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                        <button type="submit" class="edit-btn">Save Changes</button>
+                        <button type="button" id="cancel-personal-info-edit">Cancel</button>
+                      </form>
+                    </div>
+                    
+</div>
             <!-- professional info section -->
              <div class="profile-left">
              <h3>Professional Info:</h3>
@@ -91,6 +104,8 @@
     <script type="module" src="/js/logout.js"></script>
     <script src="/js/sidebar-menu.js"></script>
     <script type="module" src="/js/doctor-accountinfo.js"></script> 
+    <script src="https://unpkg.com/@geoapify/geocoder-autocomplete@1.2.0/dist/geocoder-autocomplete.min.js"></script>
+    <script src="/js/autocomplete-address.js"></script>
   
     
     

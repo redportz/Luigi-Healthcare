@@ -73,7 +73,7 @@
   
 
   /* save button */
-  .edit-btn {
+  .edit-btn,#edit-info-btn,#cancel-personal-info-edit {
     background-color: red;
     color: white;
     border: none;
@@ -115,3 +115,29 @@
     background-color: darkred;
   }
   
+.hidden{
+  display: none;
+}
+
+#suggestions-list {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 4px;
+  padding: 8px 0;
+  background-color: white;
+  z-index: 1000;
+  position: absolute;
+}
+
+#suggestions-list li {
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#suggestions-list li:hover {
+  background-color: #f0f0f0;
+}
