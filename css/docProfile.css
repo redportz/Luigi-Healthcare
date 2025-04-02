@@ -65,24 +65,19 @@ body {
     justify-content: center;
     align-items: center;
   }
-  
+
   /* icon */
   .card img {
-    width: 200px;
-    margin-bottom: 20px;
-  }
-  
-  /* clickable text only */
+     width: 280px;
+      margin-bottom: -40px;
+    }
+
+/*text under image*/
   .card-title {
-    font-size: 2.2rem;
+    font-size: 3.5rem; /* Bigger font size */
     font-weight: bold;
-    text-decoration: underline;
-    color: white;
+    text-decoration: none; /* Removed underline */
+    color: white; /* White text color */
     cursor: pointer;
-    text-align: center;
-  }
-  
-  .card-title:hover {
-    color: #e0e0e0;
-  }
-  
+    text-align: center; /* Center text */
+}

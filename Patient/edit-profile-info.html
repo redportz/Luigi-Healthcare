@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-  <!DOCTYPE html>
-  <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -34,51 +32,34 @@
     <!-- sidebar-->
     <div id="sidebar-container" nav_menu="Doctor"></div>
   
-  
     <!-- main content -->
-  <div class="content-wrapper">
+    <div class="content-wrapper">
       <div class="main-container">
-          <div class="account-box">
-              <a href="docProfile.html" class="back-btn" title="Go back to profile page">
-                <i class="fa-solid fa-arrow-left"></i> Back
-              </a>
+        <div class="account-box">
+          <a href="PatientProfile.html" class="back-btn" title="Go back to profile page">
+            <i class="fa-solid fa-arrow-left"></i> Back
+          </a>
   
-              <div class="profile-columns">
-            
-
-              <!--personal info section --->
-                <div class="profile-right">
-                  <h3>Personal Info:</h3>
-              
-                  <p><strong>Name:</strong><br><span id="firstName"></span> <span id="lastName"></span></p>
-                  <p><strong>Date of Birth:</strong><br><span id="dob"></span></p>
-
-
-                  <p><strong>Email Address:</strong><br>
-                    <span id="email"></span></p>
-            
+          <div class="profile-columns">
+            <!--personal info section --->
+            <div class="profile-right">
+              <h3>Personal Info:</h3>
+  
+              <p><strong>Name:</strong><br><span id="firstName"></span> <span id="lastName"></span></p>
+              <p><strong>Date of Birth:</strong><br><span id="dob"></span></p>
+  
+              <p><strong>Email Address:</strong><br>
+                <span id="email"></span></p>
+  
               <form>
-               
                 <label for="phone"><strong>Phone Number:</strong></label><br>
                 <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
   
                 <label for="address"><strong>Mailing Address:</strong></label><br>
                 <textarea id="address" name="address" rows="3"></textarea><br><br>
   
-  
                 <button type="submit" class="edit-btn">Save Changes</button>
               </form>
-            </div>
-  
-            <!-- professional info section -->
-             <div class="profile-left">
-             <h3>Professional Info:</h3>
-             <p><strong>License Number:</strong><br><span id="licenseNumber"></span></p> 
-  
-             <p><strong>Years of Experience:</strong><br><span id="yearsOfExperience"></span></p>
-             <p><strong>Specialty:</strong><br><span id="specialty"></span></p>
-             <p><strong>Certifications:</strong><br><span id="certifications"></span></p>
-             
             </div>
   
           </div>
@@ -86,13 +67,9 @@
       </div>
     </div>
   
-                 
     <script src="/js/load-sidebar.js"></script>
     <script type="module" src="/js/logout.js"></script>
     <script src="/js/sidebar-menu.js"></script>
-    <script type="module" src="/js/doctor-accountinfo.js"></script> 
-  
-    
-    
+    <script type="module" src="/js/patient-account-info.js"></script> 
   </body>
-  </html>
+</html>

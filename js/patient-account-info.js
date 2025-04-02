@@ -3,21 +3,15 @@ import config from "./config.js";
 const userId = localStorage.getItem("userId"); 
 
 // fetch user info from backend for view/edit
-async function fetchDoctorInfo() {
+async function fetchPatientInfo() {
   try {
     const response = await fetch(`${config.API_ENDPOINTS.getUserInfo}/${userId}`);
     const data = await response.json(); 
 
     const formattedDate = new Date(data.dateOfBirth).toLocaleDateString("en-US");
 
-    
     const phonenumber=document.getElementById("phone")
     const homeAddress=document.getElementById("address")
-
-    const certs=document.getElementById("certifications")
-    const yrs=document.getElementById("yearsOfExperience")
-    const licenseNum=document.getElementById("licenseNumber")
-    const special=document.getElementById("licenseNumber")
 
     // Populate text fields with read-only data (non-editable fields)
     document.getElementById("firstName").textContent = data.firstName;
@@ -27,11 +21,6 @@ async function fetchDoctorInfo() {
     // document.getElementById("dob").textContent = data.dateOfBirth;
     document.getElementById("dob").textContent = formattedDate;
 
-    licenseNum.textContent = data.doctorDetails.licenseNumber || "N/A";
-    yrs.textContent = data.doctorDetails.yearsOfExperience || "N/A";
-    certs.textContent = data.doctorDetails.certifications || "N/A";
-    special.textContent = data.doctorDetails.specialty || "N/A";
-  
     // Populate editable fields (phone number and address)
     phonenumber.value = data.phoneNumber || "N/A";
     homeAddress.value = data.address || "N/A";
@@ -56,7 +45,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
   try {
     // PUT request for updating doctor info for phone number and address
 
-    const response = await fetch(`${config.API_ENDPOINTS.updateDoctorInfo}/${userId}`, {
+    const response = await fetch(`${config.API_ENDPOINTS.updatePatientInfo}/${userId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -79,4 +68,4 @@ document.querySelector("form").addEventListener("submit", async (e) => {
 });
 
 // call function to load the user info when the page loads
-window.onload = fetchDoctorInfo;
+window.onload = fetchPatientInfo;

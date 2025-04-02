@@ -19,8 +19,9 @@ const config = {
             message_buttons: `${this.fetchAddress}/UserInfo/GetAll`, 
             prescriptions: `${this.fetchAddress}/api/prescriptions`, 
 
-            updateUserInfo: `${this.fetchAddress}/UserInfo/GetById`,
-
+            getUserInfo: `${this.fetchAddress}/UserInfo/GetById`,
+            updateDoctorInfo: `${this.fetchAddress}/api/UserContact`,
+            updatePatientInfo: `${this.fetchAddress}/api/UserContact`,
 
         } : {  
             login: "/json/accounts.json",
@@ -31,7 +32,8 @@ const config = {
             send: "/json/messages.json",
             message_buttons: "/json/accounts.json",
             prescriptions: "/json/accounts.json",
-            updateUserInfo: "/json/updateUserInfo.json",
+            updateDoctorInfo: "/json/updateUserInfo.json",
+            updatePatientInfo: "/json/accounts.json",
 
 
         };
