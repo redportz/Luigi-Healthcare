@@ -13,17 +13,24 @@ document.addEventListener("DOMContentLoaded", () => {
             const container = document.getElementById("Prescription-display");
             container.innerHTML = ""; // Clear previous entries
 
-            data.prescriptions.forEach(prescription => {
-                const prescriptionDiv = document.createElement("div");
-                prescriptionDiv.classList.add("prescription");
-                prescriptionDiv.innerHTML = `
-                    <h3>${prescription.name}</h3>
-                `;
-                prescriptionDiv.addEventListener("click", () => {
-                    displayPrescriptionDetails(prescription, prescriptionDiv);
+            if (data.prescriptions.length ===0) {
+                document.querySelector("main").classList.add("no-prescriptions");
+                document.getElementById("prescription-box").classList.add("hidden");
+                document.getElementById("no-prescriptions").classList.remove("hidden");
+
+            } else {
+                data.prescriptions.forEach(prescription => {
+                    const prescriptionDiv = document.createElement("div");
+                    prescriptionDiv.classList.add("prescription");
+                    prescriptionDiv.innerHTML = `
+                        <h3>${prescription.name}</h3>
+                    `;
+                    prescriptionDiv.addEventListener("click", () => {
+                        displayPrescriptionDetails(prescription, prescriptionDiv);
+                    });
+                    container.appendChild(prescriptionDiv);
                 });
-                container.appendChild(prescriptionDiv);
-            });
+            }
         })
         .catch(error => console.error("Error loading prescriptions:", error));
 });
