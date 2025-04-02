@@ -11,29 +11,25 @@ async function fetchDoctorInfo() {
     const formattedDate = new Date(data.dateOfBirth).toLocaleDateString("en-US");
 
     
-    const phonenumber=document.getElementById("phone")
+    const phoneNum=document.getElementById("phone")
     const homeAddress=document.getElementById("address")
 
     const certs=document.getElementById("certifications")
     const yrs=document.getElementById("yearsOfExperience")
     const licenseNum=document.getElementById("licenseNumber")
-    const special=document.getElementById("licenseNumber")
+    const special=document.getElementById("specialty")
 
     // Populate text fields with read-only data (non-editable fields)
     document.getElementById("firstName").textContent = data.firstName;
     document.getElementById("lastName").textContent = data.lastName;
     document.getElementById("email").textContent = data.email;
-
-    // document.getElementById("dob").textContent = data.dateOfBirth;
     document.getElementById("dob").textContent = formattedDate;
-
+    
     licenseNum.textContent = data.doctorDetails.licenseNumber || "N/A";
     yrs.textContent = data.doctorDetails.yearsOfExperience || "N/A";
     certs.textContent = data.doctorDetails.certifications || "N/A";
     special.textContent = data.doctorDetails.specialty || "N/A";
-  
-    // Populate editable fields (phone number and address)
-    phonenumber.value = data.phoneNumber || "N/A";
+    phoneNum.value = data.phoneNumber || "N/A";
     homeAddress.value = data.address || "N/A";
 
 
@@ -65,7 +61,6 @@ document.querySelector("form").addEventListener("submit", async (e) => {
       
       body: JSON.stringify(updatedUser),
     });
-    console.log(updatedUser);
     
 
     if (response.ok) {

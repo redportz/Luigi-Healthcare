@@ -28,8 +28,6 @@ async function loadMessages() {
     }
 
     try {
-        console.log(`📩 Fetching messages between user ${userId} and ${chatWithUserId}, page ${pageNumber}`);
-
         const apiUrl = config.useRealAPI 
         ? `${config.API_ENDPOINTS.messagesBase}/chat/${userId}/${chatWithUserId}/${pageNumber}/${pageSize}`
         : config.API_ENDPOINTS.messagesBase; // JSON file

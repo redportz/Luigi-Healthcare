@@ -54,9 +54,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
       
       body: JSON.stringify(updatedUser),
     });
-    console.log(updatedUser);
-    
-
+  
     if (response.ok) {
       alert("Info updated successfully!");
     } else {

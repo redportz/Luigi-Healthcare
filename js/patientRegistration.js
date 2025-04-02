@@ -48,7 +48,6 @@ document.getElementById("patient-form").addEventListener("submit", async functio
             });
 
             if (response.ok) {
-                console.log("Real Account Created:", formData);
                 document.getElementById("patient-form").style.display = "none";
                 document.getElementById("account-created-message").style.display = "flex";
             } else {

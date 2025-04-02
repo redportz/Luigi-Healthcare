@@ -23,10 +23,7 @@ function fetchPrescriptions() {
                 return;
             }
             
-            const data = await response.json();
-            console.log(data);
-            console.log(data.user);
-            
+            const data = await response.json();            
             userInfo.innerHTML += `
                     <h3>${data.user.firstName} ${data.user.lastName}</h3>
                 `;
@@ -82,9 +79,7 @@ function editPrescription(id) {
 window.editPrescription= editPrescription;
 
 
-function addPrescriptionSection(){
-    console.log("this ran");
-    
+function addPrescriptionSection(){   
     document.getElementById("add-prescription-btn").classList.toggle('hidden');
     document.getElementById("add-prescription").classList.toggle('hidden');
 }
