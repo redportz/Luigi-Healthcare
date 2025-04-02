@@ -18,6 +18,11 @@ const config = {
             send: `${this.fetchAddress}/api/messages/send`, 
             message_buttons: `${this.fetchAddress}/UserInfo/GetAll`, 
             prescriptions: `${this.fetchAddress}/api/prescriptions`, 
+
+            getUserInfo: `${this.fetchAddress}/UserInfo/GetById`,
+            updateDoctorInfo: `${this.fetchAddress}/api/UserContact`,
+            updatePatientInfo: `${this.fetchAddress}/api/UserContact`,
+
         } : {  
             login: "/json/accounts.json",
             register: "/json/accounts.json",
@@ -26,7 +31,11 @@ const config = {
             messagesBase: "/json/messages.json", 
             send: "/json/messages.json",
             message_buttons: "/json/accounts.json",
-            prescriptions: "/json/accounts.json"
+            prescriptions: "/json/accounts.json",
+            updateDoctorInfo: "/json/updateUserInfo.json",
+            updatePatientInfo: "/json/accounts.json",
+
+
         };
     }
 };
