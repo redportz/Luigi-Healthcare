@@ -33,7 +33,7 @@ const config = {
             message_buttons: "/json/accounts.json",
             prescriptions: "/json/accounts.json",
             updateDoctorInfo: "/json/updateUserInfo.json",
-            updatePatientInfo: "/json/accounts.json",
+           
 
 
         };
