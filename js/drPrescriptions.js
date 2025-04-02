@@ -43,8 +43,10 @@ function fetchPrescriptions() {
                         <p>Strength (mg): ${prescription.milligrams}</p>
                         <p>Frequency: ${prescription.frequency}</p>
                         <p>Reason: ${prescription.reason}</p>
-                        <button onclick="editPrescription(${prescription.id})">Edit</button>
-                        <button onclick="deletePrescription(${prescription.id})">Delete</button>
+                        <div class="prescriptions-btns">
+                            <button onclick="editPrescription(${prescription.id})" class="edit-prescription-btn">Edit</button>
+                            <button onclick="deletePrescription(${prescription.id})" class="delete-prescription-btn">Delete</button>
+                        </div>
                     </div>
                 `;
             });
@@ -81,7 +83,7 @@ window.editPrescription= editPrescription;
 
 function addPrescriptionSection(){   
     document.getElementById("add-prescription-btn").classList.toggle('hidden');
-    document.getElementById("add-prescription").classList.toggle('hidden');
+    document.getElementById("add-prescription-container").classList.toggle('hidden');
 }
 window.addPrescriptionSection= addPrescriptionSection;
 

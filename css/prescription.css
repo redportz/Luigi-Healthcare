@@ -1,14 +1,12 @@
-#prescription-display{
+#Prescription-display{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
     justify-items: center;
-    align-items: center;
-    height: 93vh;
-    width: 70vw;
-    align-content: center;
-    justify-content: center;
     padding: 20px 0;
+}
+#Prescription-display.onclick{
+    display: inline;
 }
 
 .prescription{
@@ -63,14 +61,11 @@
     justify-items: center;
 }
 
-.hidden{
-    display: none;
-}
+
 
 
 /* This is where the div for no prescriptions starts */
 #no-prescriptions {
-    display: flex; /* Enables Flexbox layout */
     flex-direction: column;
     background-color: var(--navbar-bg);
     width: 30%;    
@@ -111,4 +106,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.hidden{
+    display: none;
 }

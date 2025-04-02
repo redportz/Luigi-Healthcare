@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/sidebar-menu.css">
     <link rel="stylesheet" href="/css/DoctorPrescrition.css">
+    
 
     <!-- Add style sheet here -->
 </head>
@@ -34,7 +35,6 @@
 
     <main>
         <div id="doctor-dashboard">
-            <h2>Doctor Prescription Management</h2>
             <div id="User-info-display"></div>
         
             <!-- Search for a patient's prescriptions -->
@@ -42,8 +42,32 @@
             <input type="number" id="patientId" placeholder="Enter patient ID">
             <button onclick="fetchPrescriptions()">Search</button>
             <button id="add-prescription-btn" onclick="addPrescriptionSection()" style="display: none;">Add Prescription</button>
+                <div id="add-prescription-container" class="hidden">
+                    <div id="add-prescription">
+                        <h3 id="form-title">Add Prescription</h3>
+                        <form id="prescription-form">
+                            <input type="hidden" id="prescriptionId"> <!-- Hidden input for editing -->
+                            <label>Name:</label><input type="text" id="name" required><br>
+                            <label>Dosage:</label><input type="text" id="dosage" required><br>
+                            <label>Frequency:</label> <input type="text" id="frequency" required><br>
+                            <label>Strength (mg):</label> <input type="number" id="milligrams" required><br>
+                            <label>Refills Left:</label> <input type="number" id="refills" required><br>
+                            <label>Doctor:</label> <input type="text" id="doctor" required><br>
+                            <label>Phone:</label> <input type="text" id="phone" required><br>
+                            <label>Reason:</label> <textarea type="text" id="reason" required></textarea>
+                            <div class="button-row">
+                                <button type="submit">
+                                    <span>Save</span>
+                                    <span>Prescription</span>
+                                </button>
+                                <button onclick="addPrescriptionSection()">Cancel</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
             
-        
+        </div>
             <div id="no-prescriptions" style="display: none;">
                 <h1>No prescriptions found</h1>
             </div>
@@ -52,23 +76,7 @@
             <div id="prescriptions-list"></div>
         
             <!-- Prescription Form (Add/Edit) -->
-             <div id="add-prescription" class="hidden">
-                 <h3 id="form-title">Add Prescription</h3>
-                 <form id="prescription-form">
-                     <input type="hidden" id="prescriptionId"> <!-- Hidden input for editing -->
-                     <label>Name:</label><br> <input type="text" id="name" required><br>
-                     <label>Dosage:</label> <br><input type="text" id="dosage" required><br>
-                     <label>Frequency:</label><br> <input type="text" id="frequency" required><br>
-                     <label>Strength (mg):</label> <br><input type="number" id="milligrams" required><br>
-                     <label>Refills Left:</label><br> <input type="number" id="refills" required><br>
-                     <label>Doctor:</label><br> <input type="text" id="doctor" required><br>
-                     <label>Phone:</label><br> <input type="text" id="phone" required><br>
-                     <label>Reason:</label><br> <input type="text" id="reason" required><br>
-                     <button type="submit">Save Prescription</button>
-                     <button onclick="addPrescriptionSection()">Cancel</button>
-                    </form>
-                </div>
-        </div>
+        
         
         <!-- Your page content goes here -->
     </main>
