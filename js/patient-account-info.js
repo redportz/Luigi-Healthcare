@@ -2,28 +2,45 @@ import config from "./config.js";
 
 const userId = localStorage.getItem("userId"); 
 
+
+const editBtn = document.getElementById("edit-info-btn");
+const phoneAndAddressContainer = document.getElementById("phone-and-address-container");
+const editContainer = document.getElementById("edit-container");
+let originalPhoneNumber="";
+let originalAddress = "";const input = document.getElementById("autocomplete-input");
+const suggestionsList = document.getElementById("suggestions-list");
+const cancelBtn = document.getElementById("cancel-personal-info-edit");
+const phoneNum=document.getElementById("phoneNumber-display")
+const homeAddress=document.getElementById("address-display")
+
+
+
+document.addEventListener("click", (event) => {
+  // If click is outside the input and the suggestion list
+  if (!input.contains(event.target) && !suggestionsList.contains(event.target)) {
+    suggestionsList.innerHTML = ""; // Clear the list
+  }
+});
+
 // fetch user info from backend for view/edit
 async function fetchPatientInfo() {
   try {
     const response = await fetch(`${config.API_ENDPOINTS.getUserInfo}/${userId}`);
     const data = await response.json(); 
+    originalPhoneNumber = data.phoneNumber;
+    originalAddress = data.address;
+    console.log(data);
 
     const formattedDate = new Date(data.dateOfBirth).toLocaleDateString("en-US");
-
-    const phonenumber=document.getElementById("phone")
-    const homeAddress=document.getElementById("address")
-
     // Populate text fields with read-only data (non-editable fields)
     document.getElementById("firstName").textContent = data.firstName;
     document.getElementById("lastName").textContent = data.lastName;
     document.getElementById("email").textContent = data.email;
-
-    // document.getElementById("dob").textContent = data.dateOfBirth;
     document.getElementById("dob").textContent = formattedDate;
-
-    // Populate editable fields (phone number and address)
-    phonenumber.value = data.phoneNumber || "N/A";
-    homeAddress.value = data.address || "N/A";
+    
+    
+    phoneNum.textContent = originalPhoneNumber || "Not Available";
+    homeAddress.textContent = originalAddress || "Not Available";
 
 
   } catch (err) {
@@ -31,19 +48,29 @@ async function fetchPatientInfo() {
   }
 }
 
+editBtn.addEventListener("click", () => {
+  phoneAndAddressContainer.classList.add("hidden");
+  editContainer.classList.remove("hidden");
+  document.getElementById("phone").value = originalPhoneNumber;
+  document.getElementById("autocomplete-input").value = originalAddress;
+});
+
 // update user info when form is submitted
 document.querySelector("form").addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  // prepare the updated user info 
+  const phoneInput = document.getElementById("phone").value.trim();
+  const addressInput = document.getElementById("autocomplete-input").value.trim();
+
+  
   const updatedUser = {
-    PhoneNumber: document.getElementById("phone").value,
-    Address: document.getElementById("address").value,
+    PhoneNumber: phoneInput !== "" ? phoneInput : originalPhoneNumber,
+    Address: addressInput !== "" ? addressInput : originalAddress,
   };
 
 
   try {
-    // PUT request for updating doctor info for phone number and address
+    // PUT request for updating patient info for phone number and address
 
     const response = await fetch(`${config.API_ENDPOINTS.updatePatientInfo}/${userId}`, {
       method: "PUT",
@@ -54,9 +81,13 @@ document.querySelector("form").addEventListener("submit", async (e) => {
       
       body: JSON.stringify(updatedUser),
     });
-  
+    
+
     if (response.ok) {
-      alert("Info updated successfully!");
+
+      editContainer.classList.add("hidden");
+      phoneAndAddressContainer.classList.remove("hidden");
+      fetchPatientInfo()
     } else {
       alert("Failed to update info.");
     }
@@ -64,6 +95,17 @@ document.querySelector("form").addEventListener("submit", async (e) => {
     console.error("Update failed:", err);
   }
 });
+window.onload = fetchPatientInfo;
 
 // call function to load the user info when the page loads
-window.onload = fetchPatientInfo;
+cancelBtn.addEventListener("click", () => {
+
+  document.getElementById("phone").value = originalPhoneNumber;
+  document.getElementById("autocomplete-input").value = originalAddress;
+
+  editContainer.classList.add("hidden");
+
+  phoneAndAddressContainer.classList.remove("hidden");
+
+  suggestionsList.innerHTML = "";
+});
