@@ -1,6 +1,7 @@
 import config from "./config.js";
 
 const userId = localStorage.getItem("userId");
+let oldPrescriptionId;
 
 // Fetch prescriptions for a specific patient
 function fetchPrescriptions() {
@@ -10,7 +11,8 @@ function fetchPrescriptions() {
         .then(async response => {
             const list = document.getElementById("prescriptions-list");
             const userInfo = document.getElementById("User-info-display")
-            
+
+
             list.innerHTML = "";
             userInfo.innerHTML = "";
             document.getElementById("no-prescriptions").style.display = "none";
@@ -34,6 +36,11 @@ function fetchPrescriptions() {
                 return;
             }
 
+            console.log(data.prescriptions);
+            
+            console.log(data.prescriptions[data.prescriptions.length-1]);
+            oldPrescriptionId=data.prescriptions[data.prescriptions.length-1].id+1;
+
             data.prescriptions.forEach(prescription => {
                 list.innerHTML += `
                     <div class="prescription-item">
@@ -49,13 +56,13 @@ function fetchPrescriptions() {
                         </div>
                     </div>
                 `;
+                
             });
         })
         .catch(error => {
             console.error("Error loading prescriptions:", error);
         });
 }
-
 
 window.fetchPrescriptions = fetchPrescriptions;
 
@@ -78,7 +85,12 @@ function editPrescription(id) {
 
 }
 
+function addPrescriptionButton(){
+    editPrescription(oldPrescriptionId);
+}
+
 window.editPrescription= editPrescription;
+window.addPrescriptionButton = addPrescriptionButton;
 
 
 function addPrescriptionSection(){   
@@ -91,6 +103,8 @@ window.addPrescriptionSection= addPrescriptionSection;
 document.getElementById("prescription-form").addEventListener("submit", (event) => {
     event.preventDefault();
     
+
+
     const prescriptionId = document.getElementById("prescriptionId").value;
     const method = prescriptionId ? "PUT" : "POST";
     const endpoint = prescriptionId
