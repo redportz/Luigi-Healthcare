@@ -57,7 +57,7 @@ function fetchPrescriptions() {
 }
 
 
-window.fetchPrescriptions= fetchPrescriptions;
+window.fetchPrescriptions = fetchPrescriptions;
 
 // Populate the form with prescription data for editing
 function editPrescription(id) {
