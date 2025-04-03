@@ -34,12 +34,7 @@ function fetchPrescriptions() {
             if (data.prescriptions.length === 0) {
                 document.getElementById("no-prescriptions").style.display = "block";
                 return;
-            }
-
-            console.log(data.prescriptions);
-            
-            console.log(data.prescriptions[data.prescriptions.length-1]);
-            oldPrescriptionId=data.prescriptions[data.prescriptions.length-1].id+1;
+            }           
 
             data.prescriptions.forEach(prescription => {
                 list.innerHTML += `
@@ -51,7 +46,7 @@ function fetchPrescriptions() {
                         <p>Frequency: ${prescription.frequency}</p>
                         <p>Reason: ${prescription.reason}</p>
                         <div class="prescriptions-btns">
-                            <button onclick="editPrescription(${prescription.id})" class="edit-prescription-btn">Edit</button>
+                            <button onclick="editPrescription(${prescription.id}, true)" class="edit-prescription-btn">Edit</button>
                             <button onclick="deletePrescription(${prescription.id})" class="delete-prescription-btn">Delete</button>
                         </div>
                     </div>
@@ -67,29 +62,45 @@ function fetchPrescriptions() {
 window.fetchPrescriptions = fetchPrescriptions;
 
 // Populate the form with prescription data for editing
-function editPrescription(id) {
-    addPrescriptionSection()
-    fetch(`${config.API_ENDPOINTS.prescriptions}/${id}`)
-        .then(response => response.json())
-        .then(prescription => {
-            document.getElementById("prescriptionId").value = prescription.id;
-            document.getElementById("name").value = prescription.name;
-            document.getElementById("dosage").value = prescription.dosage;
-            document.getElementById("frequency").value = prescription.frequency;
-            document.getElementById("milligrams").value = prescription.milligrams;
-            document.getElementById("refills").value = prescription.refills;
-            document.getElementById("doctor").value = prescription.doctor;
-            document.getElementById("phone").value = prescription.phone;
-            document.getElementById("reason").value = prescription.reason;
-        });
+function editPrescription(id, isEditing) {
+    addPrescriptionSection();
+
+    if (isEditing && id !== null) {
+        fetch(`${config.API_ENDPOINTS.prescriptions}/${id}`)
+            .then(response => response.json())
+            .then(prescription => {
+                document.getElementById("prescriptionId").value = prescription.id;
+                document.getElementById("name").value = prescription.name;
+                document.getElementById("dosage").value = prescription.dosage;
+                document.getElementById("frequency").value = prescription.frequency;
+                document.getElementById("milligrams").value = prescription.milligrams;
+                document.getElementById("refills").value = prescription.refills;
+                document.getElementById("doctor").value = prescription.doctor;
+                document.getElementById("phone").value = prescription.phone;
+                document.getElementById("reason").value = prescription.reason;
+            });
+    } else {
+        // It's a new prescription — clear the form
+        document.getElementById("prescriptionId").value = "";
+        document.getElementById("name").value = "";
+        document.getElementById("dosage").value = "";
+        document.getElementById("frequency").value = "";
+        document.getElementById("milligrams").value = "";
+        document.getElementById("refills").value = "";
+        document.getElementById("doctor").value = "";
+        document.getElementById("phone").value = "";
+        document.getElementById("reason").value = "";
+    }
 
 }
+window.editPrescription= editPrescription;
 
 function addPrescriptionButton(){
-    editPrescription(oldPrescriptionId);
+    // document.getElementById("new-prescription-Btn").classList.remove("hidden")
+    editPrescription(null,false);
+    
 }
 
-window.editPrescription= editPrescription;
 window.addPrescriptionButton = addPrescriptionButton;
 
 
@@ -137,6 +148,9 @@ function deletePrescription(id) {
     fetch(`${config.API_ENDPOINTS.prescriptions}/${id}?userId=${userId}`, {
         method: "DELETE"
     })
-    .then(() => fetchPrescriptions());
+.then(() => {
+            document.getElementById("prescription-form").reset();
+    fetchPrescriptions();
+});
 }
 window.deletePrescription=deletePrescription
