@@ -1,10 +1,7 @@
 import config from "./config.js";
 
-// Get user ID from localStorage - similarly to how drPrescriptions.js does it
-const userId = parseInt(localStorage.getItem("userId")) || 1;
 
-// Function to fetch doctors for dropdown - similar to fetchPrescriptions()
-async function fetchDoctors() {
+async function fetchDoctors(userId) {
     try {
         const response = await fetch(`${config.API_ENDPOINTS.message_buttons}?currentUserId=${userId}`);
         if (!response.ok) throw new Error('Failed to fetch users');
@@ -16,82 +13,13 @@ async function fetchDoctors() {
         return [];
     }
 }
-window.fetchDoctors = fetchDoctors;
-
-// Function to get appointments - similar pattern to fetchPrescriptions()
-async function getAppointmentsByPatient(patientId) {
-    try {
-        const res = await fetch(`${config.API_ENDPOINTS.getPatientAppointments}/${patientId}`);
-        if (!res.ok) {
-            console.error("Failed to fetch appointments");
-            return [];
-        }
-        const appointments = await res.json();
-        console.log("Patient's Appointments:", appointments);
-        return appointments;
-    } catch (error) {
-        console.error("Error loading appointments:", error);
-        return [];
-    }
-}
-window.getAppointmentsByPatient = getAppointmentsByPatient;
-
-// Function to delete appointment - similar to deletePrescription()
-async function deleteAppointment(appointmentId) {
-    try {
-        const res = await fetch(`${config.API_ENDPOINTS.adminAppointments}/${appointmentId}`, {
-            method: "DELETE"
-        });
-        
-        if (res.ok) {
-            console.log(`Appointment ${appointmentId} deleted.`);
-            return true;
-        } else {
-            console.error(`Failed to delete appointment ${appointmentId}`);
-            return false;
-        }
-    } catch (error) {
-        console.error("Error deleting appointment:", error);
-        return false;
-    }
-}
-window.deleteAppointment = deleteAppointment;
-
-// Function to create appointment - similar to prescription form submission
-async function createAppointment(appointmentData) {
-    try {
-        const res = await fetch(`${config.API_ENDPOINTS.adminAppointments}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(appointmentData)
-        });
-        
-        if (!res.ok) {
-            const errorText = await res.text();
-            console.error("Error response:", errorText);
-            throw new Error("Failed to create appointment");
-        }
-        
-        const data = await res.json();
-        console.log("Appointment created:", data);
-        return data;
-    } catch (error) {
-        console.error("Error creating appointment:", error);
-        return null;
-    }
-}
-window.createAppointment = createAppointment;
 
 document.addEventListener("DOMContentLoaded", async function () {
+  
+    const userId = parseInt(localStorage.getItem("userId")) || 1;
+    
     const calendarEl = document.getElementById("calendar");
-    if (!calendarEl) {
-        console.error("Calendar element not found");
-        return;
-    }
 
-    // Create calendar instance
     const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: "dayGridMonth",
         selectable: true,
@@ -104,21 +32,29 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
     });
 
-    // Fetch doctors for the dropdown - similar to drPrescriptions approach
-    const doctors = await fetchDoctors();
-
-    // Load appointments - similar pattern as fetchPrescriptions()
-    const appointments = await getAppointmentsByPatient(userId);
     
-    // Add appointments to calendar
-    if (appointments && appointments.length > 0) {
-        appointments.forEach(appointment => {
-            calendar.addEvent({
-                id: appointment.appointmentId,
-                title: appointment.reason || "No title",
-                start: appointment.appointmentDate
+    const doctors = await fetchDoctors(userId);
+
+    // Load user's appointments
+    try {
+        const res = await fetch(`${config.API_ENDPOINTS.getPatientAppointments}/${userId}`);
+        if (res.ok) {
+            const appointments = await res.json();
+            console.log("Patient's Appointments:", appointments);
+            
+          
+            appointments.forEach(appointment => {
+                calendar.addEvent({
+                    id: appointment.appointmentId,
+                    title: appointment.reason || "No title",
+                    start: appointment.appointmentDate
+                });
             });
-        });
+        } else {
+            console.error("Failed to fetch appointments");
+        }
+    } catch (error) {
+        console.error("Error loading appointments:", error);
     }
 
     calendar.render();
@@ -130,7 +66,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         document.getElementById("appointment-title").value = "";
         document.getElementById("appointment-time").value = "";
         
-        // Populate doctor dropdown - similar to how options are added in drPrescriptions
+        
         const doctorSelect = document.getElementById("appointment-doctor");
         if (doctorSelect) {
             doctorSelect.innerHTML = '<option value="">Select a doctor</option>';
@@ -138,6 +74,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             doctors.forEach(doctor => {
                 const option = document.createElement("option");
                 option.value = doctor.userId;
+                
                 
                 if (doctor.specialty) {
                     option.textContent = `${doctor.firstName} ${doctor.lastName} (${doctor.specialty})`;
@@ -154,56 +91,51 @@ document.addEventListener("DOMContentLoaded", async function () {
         document.getElementById("edit-appointment-popup").style.display = "block";
         document.getElementById("edit-appointment-title").value = event.title;
         document.getElementById("edit-appointment-date").value = event.startStr.split("T")[0];
+        document.getElementById("edit-appointment-time").value = event.startStr.split("T")[1] || "";
         
-        // Handle time value more carefully
-        let timeValue = "";
-        if (event.startStr.includes("T")) {
-            timeValue = event.startStr.split("T")[1];
-            if (timeValue.includes("+") || timeValue.includes("Z")) {
-                timeValue = timeValue.split("+")[0].split("Z")[0];
-            }
-            timeValue = timeValue.substring(0, 5); // Get HH:MM format
-        }
-        
-        document.getElementById("edit-appointment-time").value = timeValue;
-        
-        // Store the event ID on the popup - similar pattern to how prescriptionId is stored
+       
         document.getElementById("edit-appointment-popup").setAttribute("data-appointment-id", event.id);
 
-        // Edit button handler - similar to edit prescription
         document.getElementById("save-edit-btn").onclick = async function () {
             const appointmentId = document.getElementById("edit-appointment-popup").getAttribute("data-appointment-id");
             const title = document.getElementById("edit-appointment-title").value;
             const date = document.getElementById("edit-appointment-date").value;
             const time = document.getElementById("edit-appointment-time").value;
             
-            // Update UI first
             event.setProp("title", title);
             event.setStart(date + "T" + time);
             
-            // TODO: Add API call to update appointment on backend
-            // Similar to how prescription updates work
+            
             
             document.getElementById("edit-appointment-popup").style.display = "none";
         };
 
-        // Delete button handler - uses the extracted deleteAppointment function
         document.getElementById("delete-btn").onclick = async function () {
             if (confirm("Are you sure you want to delete this appointment?")) {
                 const appointmentId = document.getElementById("edit-appointment-popup").getAttribute("data-appointment-id");
                 
-                const success = await deleteAppointment(appointmentId);
-                if (success) {
-                    event.remove();
-                    document.getElementById("edit-appointment-popup").style.display = "none";
-                } else {
-                    alert("Failed to delete appointment. Please try again.");
+                try {
+                    const res = await fetch(`${config.API_ENDPOINTS.adminAppointments}/${appointmentId}`, {
+                        method: "DELETE"
+                    });
+                    
+                    if (res.ok) {
+                        console.log(`Appointment ${appointmentId} deleted.`);
+                        event.remove();
+                    } else {
+                        console.error(`Failed to delete appointment ${appointmentId}`);
+                        alert("Failed to delete appointment. Please try again.");
+                    }
+                } catch (error) {
+                    console.error("Error deleting appointment:", error);
+                    alert("An error occurred while deleting the appointment.");
                 }
+                
+                document.getElementById("edit-appointment-popup").style.display = "none";
             }
         };
     }
 
-    // Close popup handlers
     document.querySelectorAll(".close-popup").forEach((btn) => {
         btn.addEventListener("click", function () {
             document.getElementById("appointment-popup").style.display = "none";
@@ -211,7 +143,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         });
     });
 
-    // Form submission - similar pattern to prescription form submission
     document.getElementById("appointment-form").addEventListener("submit", async function (event) {
         event.preventDefault();
         
@@ -219,7 +150,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         const date = document.getElementById("appointment-date").value;
         const time = document.getElementById("appointment-time").value;
         
-        // Handle doctor selection - get value from dropdown if it exists
         const doctorSelect = document.getElementById("appointment-doctor");
         let doctorId;
         
@@ -230,7 +160,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 return;
             }
         } else {
-            // If we're in the doctor's dashboard, the doctor is the current user
+           
             doctorId = userId;
         }
         
@@ -239,7 +169,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             return;
         }
 
-        // Format data for backend - follows the model structure like in prescriptionData
+        
         const appointmentData = {
             appointmentDate: `${date}T${time}:00`,
             reason: title,
@@ -247,20 +177,36 @@ document.addEventListener("DOMContentLoaded", async function () {
             doctorId: doctorId
         };
 
-        // Use the extracted createAppointment function
-        const savedAppointment = await createAppointment(appointmentData);
-        
-        if (savedAppointment && savedAppointment.appointmentId) {
-            // Add to calendar
+        try {
+            const res = await fetch(`${config.API_ENDPOINTS.adminAppointments}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(appointmentData)
+            });
+            
+            if (!res.ok) {
+                const errorText = await res.text();
+                console.error("Error response:", errorText);
+                throw new Error("Failed to create appointment");
+            }
+            
+            const data = await res.json();
+            console.log("Appointment created:", data);
+            
+            
             calendar.addEvent({
-                id: savedAppointment.appointmentId,
-                title: savedAppointment.reason,
-                start: savedAppointment.appointmentDate
+                id: data.appointmentId,
+                title: appointmentData.reason,
+                start: appointmentData.appointmentDate
             });
             
             document.getElementById("appointment-popup").style.display = "none";
-        } else {
-            alert("Failed to save appointment. Please try again.");
+            
+        } catch (error) {
+            console.error("Error creating appointment:", error);
+            alert("An error occurred while creating the appointment. Please try again.");
         }
     });
 });
