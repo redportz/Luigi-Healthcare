@@ -23,6 +23,10 @@ const config = {
             updateDoctorInfo: `${this.fetchAddress}/api/UserContact`,
             updatePatientInfo: `${this.fetchAddress}/api/UserContact`,
 
+            getDocAppointments: `${this.fetchAddress}/api/appointments/doctor`,//add /${doctorId}
+            getPatientAppointments: `${this.fetchAddress}/api/appointments/patient`,//add /${patientId}
+            adminAppointments: `${this.fetchAddress}/api/appointments`,// This will be for posting and getting add ${AppointmentId} to delete appointment
+
         } : {  
             login: "/json/accounts.json",
             register: "/json/accounts.json",
@@ -34,6 +38,7 @@ const config = {
             prescriptions: "/json/accounts.json",
             updateDoctorInfo: "/json/updateUserInfo.json",
            
+
 
 
         };

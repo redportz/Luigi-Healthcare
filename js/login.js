@@ -37,6 +37,7 @@ document.getElementById("login-form").addEventListener("submit", async function(
             if (response.ok) {
                 const result = await response.json();
                 localStorage.setItem("userId", result.userId);
+                localStorage.setItem("userRole", result.role);
                 handleLoginSuccess(result); 
             } else {
                 throw new Error(await response.text()); 
