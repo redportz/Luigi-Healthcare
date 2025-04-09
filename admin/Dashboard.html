@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="/css/sidebar-menu.css">
     <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet' />
     <link rel="stylesheet" href="/css/calendar.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 </head>
 <body>
     <header>
@@ -51,7 +54,7 @@
                 <label for="appointment-date">Date:</label>
                 <input type="date" id="appointment-date" required>
                 <label for="appointment-time">Time:</label>
-                <input type="time" id="appointment-time" required>
+                <select id="appointment-time" name="appointment-time" class="appointment-time" required></select>
                 <label for="appointment-reason">Reason:</label>
                 <input type="text" id="appointment-reason" required>
                 <button type="submit">Save</button>
@@ -68,8 +71,8 @@
                 <label for="edit-appointment-date">Date:</label>
                 <input type="date" id="edit-appointment-date" required>
                 <label for="edit-appointment-time">Time:</label>
-                <input type="time" id="edit-appointment-time" required>
-                <label for="edit-appointment-reason">Reason</label>
+                <select id="edit-appointment-time" name="appointment-time" class="appointment-time" required></select>
+                <label for="edit-appointment-reason">Reason:</label>
                 <input type="text" id="edit-appointment-reason" required>
                 <button type="button" id="save-edit-btn">Save</button>
                 <button type="button" id="delete-btn" class="delete">Delete</button>

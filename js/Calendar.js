@@ -50,6 +50,20 @@ async function getAppointmentsByPatient(patientId) {
 }
 window.getAppointmentsByPatient = getAppointmentsByPatient;
 
+async function getAppointmentsByDoctor(doctorId) {
+    try {
+        const res = await fetch(`${config.API_ENDPOINTS.getDocAppointments}/${doctorId}`);
+        if (!res.ok) throw new Error("Failed to fetch doctor appointments");
+        const appointments = await res.json();
+        return appointments;
+    } catch (error) {
+        console.error("Error loading doctor's appointments:", error);
+        return [];
+    }
+}
+
+window.getAppointmentsByDoctor=getAppointmentsByDoctor
+
 // Delete appointment
 async function deleteAppointment(appointmentId) {
     try {
@@ -180,15 +194,19 @@ async function openEditPopup(event) {
         let patientId = userId;
         let doctorId;
 
+        let appointments = [];
+
         if (role === "Admin") {
-            const appointments = await getAppointmentsByPatient(userId);
-            const matched = appointments.find(a => a.appointmentId == appointmentId);
-            if (matched) {
-                doctorId = matched.doctorId;
-                patientId = matched.patientId;
+            try {
+                const res = await fetch(config.API_ENDPOINTS.adminAppointments);
+                if (!res.ok) throw new Error("Failed to fetch all appointments");
+                appointments = await res.json();
+                console.log("Admin appointments:", appointments);
+            } catch (err) {
+                console.error("Error fetching admin appointments:", err);
             }
-        } else {
-            const appointments = await getAppointmentsByPatient(userId);
+        }else {
+            appointments = await getAppointmentsByPatient(userId);
             const matched = appointments.find(a => a.appointmentId == appointmentId);
             if (matched) doctorId = matched.doctorId;
         }
@@ -363,16 +381,36 @@ document.addEventListener("DOMContentLoaded", async function () {
     
     
 
-    const appointments = await getAppointmentsByPatient(userId);
-    if (appointments.length > 0) {
-        appointments.forEach(appointment => {
-            calendar.addEvent({
-                id: appointment.appointmentId,
-                title: appointment.reason || "No reason",
-                start: appointment.appointmentDate
-            });
-        });
+// fetch appointments depending on role
+let appointments = [];
+
+if (role === "Admin") {
+    try {
+        const res = await fetch(config.API_ENDPOINTS.adminAppointments);
+        if (!res.ok) throw new Error("Failed to fetch admin appointments");
+        appointments = await res.json();
+        console.log("Admin appointments loaded:", appointments);
+    } catch (err) {
+        console.error("Admin load error:", err);
     }
+} else if (role === "Doctor") {
+    appointments = await getAppointmentsByDoctor(userId); // ✅ now loads doctor's calendar
+} else {
+    appointments = await getAppointmentsByPatient(userId);
+}
+
+// Add appointments to the calendar
+appointments.forEach(appointment => {
+    calendar.addEvent({
+        id: appointment.appointmentId,
+        title: appointment.reason || "No reason",
+        start: appointment.appointmentDate
+    });
+});
+
+
+    
+
 
     calendar.render();
 
@@ -438,25 +476,27 @@ document.addEventListener("DOMContentLoaded", async function () {
             editPopup.style.display = "none";
         }
     });
+    
+    flatpickr("#appointment-date", {
+        dateFormat: "Y-m-d",
+        minDate: "today",
+        disable: [
+            function (date) {
+                // Disable Saturdays (6) and Sundays (0)
+                return (date.getDay() === 0 || date.getDay() === 6);
+            }
+        ]
+    });
+
+    flatpickr("#edit-appointment-date", {
+        dateFormat: "Y-m-d",
+        minDate: "today",
+        disable: [
+            function (date) {
+                return (date.getDay() === 0 || date.getDay() === 6);
+            }
+        ]
+    });
 });
 
-flatpickr("#appointment-date", {
-    dateFormat: "Y-m-d",
-    minDate: "today",
-    disable: [
-        function (date) {
-            // Disable Saturdays (6) and Sundays (0)
-            return (date.getDay() === 0 || date.getDay() === 6);
-        }
-    ]
-});
 
-flatpickr("#edit-appointment-date", {
-    dateFormat: "Y-m-d",
-    minDate: "today",
-    disable: [
-        function (date) {
-            return (date.getDay() === 0 || date.getDay() === 6);
-        }
-    ]
-});
