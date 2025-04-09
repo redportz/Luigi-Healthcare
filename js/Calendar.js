@@ -191,7 +191,7 @@ async function openEditPopup(event) {
         const date = document.getElementById("edit-appointment-date").value;
         const time = document.getElementById("edit-appointment-time").value;
 
-        let patientId = userId;
+        let patientId = parseInt(localStorage.getItem("patientId"));
         let doctorId;
 
         let appointments = [];
@@ -433,7 +433,7 @@ appointments.forEach(appointment => {
         const doctorId = parseInt(document.getElementById("appointment-doctor").value);
         if (!doctorId) return alert("Please select a doctor.");
 
-        let patientId = userId;
+        let patientId = parseInt(localStorage.getItem("patientId"));
         if (role === "Admin") {
             const patientSelect = document.getElementById("appointment-patient");
             patientId = parseInt(patientSelect.value);

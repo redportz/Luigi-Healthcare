@@ -6,6 +6,7 @@ document.getElementById("login-form").addEventListener("submit", async function(
     const enteredPassword = document.getElementById("password").value;
     let user=null;
 
+
     if (!config.useRealAPI) {
         const users = [
             { UserId: 25, FirstName: "Admin", LastName: "Test", DateOfBirth: "1990-01-01T00:00:00", SSN: "987654321", Email: "AdminTest@email.com", Password: "pass123", role: "Administrator" },
@@ -38,7 +39,23 @@ document.getElementById("login-form").addEventListener("submit", async function(
                 const result = await response.json();
                 localStorage.setItem("userId", result.userId);
                 localStorage.setItem("userRole", result.role);
-                handleLoginSuccess(result); 
+
+                if (result.role === "Patient") {
+                    try {
+                        const res = await fetch(`${config.API_ENDPOINTS.getPatientByUserId}/${result.userId}`);
+                        if (!res.ok) throw new Error("Failed to fetch patientId");
+                        const data = await res.json();
+                        localStorage.setItem("patientId", data.patientId);
+                        console.log("Stored patientId:", data.patientId);
+                    } catch (err) {
+                        console.error("Could not fetch patientId:", err);
+                        alert("Unable to load patient profile. Try again or contact support.");
+                        return; // prevent redirect
+                    }
+                }
+                
+                handleLoginSuccess(result);
+                
             } else {
                 throw new Error(await response.text()); 
             }

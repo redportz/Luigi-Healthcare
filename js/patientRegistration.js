@@ -25,8 +25,11 @@ document.getElementById("patient-form").addEventListener("submit", async functio
         ssn: ssn,
         email: document.getElementById("email").value,
         password: password,
-        role: "Patient"
+        role: "Patient",
+        InsuranceName: document.getElementById("insurance-name").value,
+        MemberID: document.getElementById("member-id").value
     };
+    
 
     if (new Date(formData.dateOfBirth) >= new Date(today)) {
         alert("Please select a date before today.");

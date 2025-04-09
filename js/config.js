@@ -18,6 +18,7 @@ const config = {
             send: `${this.fetchAddress}/api/messages/send`, 
             message_buttons: `${this.fetchAddress}/UserInfo/GetAll`, 
             prescriptions: `${this.fetchAddress}/api/prescriptions`, 
+            getPatientByUserId: "http://localhost:5114/api/patients/by-user-id",
 
             getUserInfo: `${this.fetchAddress}/UserInfo/GetById`,
             updateDoctorInfo: `${this.fetchAddress}/api/UserContact`,
