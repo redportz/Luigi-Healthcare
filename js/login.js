@@ -39,6 +39,7 @@ document.getElementById("login-form").addEventListener("submit", async function(
                 console.log("Real API Login Successful:", result);
 
                 localStorage.setItem("userId", result.userId);
+                localStorage.setItem("userRole", result.role);
                 handleLoginSuccess(result); 
             } else {
                 throw new Error(await response.text()); 

@@ -33,19 +33,27 @@
 
     <main>
         <div id='calendar'></div>
-    </main>
+
 
     <div id="appointment-popup" class="popup">
         <div class="popup-content">
             <span class="close-popup">&times;</span>
             <h2>Manage Appointment</h2>
             <form id="appointment-form">
-                <label for="appointment-title">Title:</label>
-                <input type="text" id="appointment-title" required>
+                <label for="appointment-patient" class="admin-only hidden">Patient:</label>
+                    <select id="appointment-patient" class="admin-only hidden">
+                        <option value="">Select a patient</option>
+                    </select>
+                <label for="appointment-doctor">Doctor:</label>
+                    <select id="appointment-doctor" required>
+                        <option value="">Select a doctor</option>
+                    </select>
                 <label for="appointment-date">Date:</label>
                 <input type="date" id="appointment-date" required>
                 <label for="appointment-time">Time:</label>
                 <input type="time" id="appointment-time" required>
+                <label for="appointment-reason">Reason:</label>
+                <input type="text" id="appointment-reason" required>
                 <button type="submit">Save</button>
             </form>
         </div>
@@ -56,18 +64,19 @@
             <span class="close-popup">&times;</span>
             <h2>Edit Appointment</h2>
             <form id="edit-appointment-form">
-                <label for="edit-appointment-title">Title:</label>
-                <input type="text" id="edit-appointment-title" required>
+                
                 <label for="edit-appointment-date">Date:</label>
                 <input type="date" id="edit-appointment-date" required>
                 <label for="edit-appointment-time">Time:</label>
                 <input type="time" id="edit-appointment-time" required>
+                <label for="edit-appointment-reason">Reason</label>
+                <input type="text" id="edit-appointment-reason" required>
                 <button type="button" id="save-edit-btn">Save</button>
                 <button type="button" id="delete-btn" class="delete">Delete</button>
             </form>
         </div>
     </div>
-
+    </main>
 
 
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
@@ -75,6 +84,6 @@
     <script src="/js/logout.js"></script>
     <script src="/js/load-sidebar.js"></script>
     <script src="/js/sidebar-menu.js"></script>
-    <script src="/js/Calendar.js"></script>
+    <script type="module" src="/js/Calendar.js"></script>
 </body>
 </html>

@@ -83,3 +83,7 @@
 .fc .fc-toolbar.fc-header-toolbar {
     padding-top: 5px;
 }
+
+.hidden{
+    display: none;
+}
