@@ -60,15 +60,19 @@
         <div class="popup-content">
             <span class="close-popup">&times;</span>
             <h2>Edit Appointment</h2>
-            <form id="edit-appointment-form">
-                <label for="edit-appointment-title">Title:</label>
-                <input type="text" id="edit-appointment-title" required>
-                <label for="edit-appointment-date">Date:</label>
-                <input type="date" id="edit-appointment-date" required>
-                <label for="edit-appointment-time">Time:</label>
-                <input type="time" id="edit-appointment-time" required>
-                <button type="button" id="save-edit-btn">Save</button>
-                <button type="button" id="delete-btn" class="delete">Delete</button>
+            <form id="appointment-form">
+                <label for="appointment-title">Title:</label>
+                <input type="text" id="appointment-title" required>
+                <label for="appointment-date">Date:</label>
+                <input type="date" id="appointment-date" required>
+                <label for="appointment-time">Time:</label>
+                <input type="time" id="appointment-time" required>
+                <label for="appointment-doctor">Doctor:</label>
+                <select id="appointment-doctor" required>
+                    <option value="">Select a doctor</option>
+                    <!-- Options will be populated dynamically -->
+                </select>
+                <button type="submit">Save</button>
             </form>
         </div>
     </div>
