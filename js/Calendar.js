@@ -37,9 +37,9 @@ async function fetchPatients() {
 window.fetchPatients = fetchPatients;
 
 // Fetch appointments for patient
-async function getAppointmentsByPatient(patientId) {
+async function getAppointmentsByPatient(userId) {
     try {
-        const res = await fetch(`${config.API_ENDPOINTS.getPatientAppointments}/${patientId}`);
+        const res = await fetch(`${config.API_ENDPOINTS.getPatientAppointments}/${userId}`);
         if (!res.ok) throw new Error("Failed to fetch appointments");
         const appointments = await res.json();
         return appointments;
@@ -191,7 +191,6 @@ async function openEditPopup(event) {
         const date = document.getElementById("edit-appointment-date").value;
         const time = document.getElementById("edit-appointment-time").value;
 
-        let patientId = parseInt(localStorage.getItem("patientId"));
         let doctorId;
 
         let appointments = [];
@@ -211,7 +210,7 @@ async function openEditPopup(event) {
             if (matched) doctorId = matched.doctorId;
         }
 
-        if (!doctorId || !patientId) {
+        if (!doctorId || !userId) {
             alert("Missing doctor or patient ID.");
             return;
         }
@@ -219,7 +218,7 @@ async function openEditPopup(event) {
         const appointmentData = {
             appointmentDate: `${date}T${time}:00`,
             reason,
-            patientId,
+            userId,
             doctorId
         };
 
@@ -394,7 +393,7 @@ if (role === "Admin") {
         console.error("Admin load error:", err);
     }
 } else if (role === "Doctor") {
-    appointments = await getAppointmentsByDoctor(userId); // ✅ now loads doctor's calendar
+    appointments = await getAppointmentsByDoctor(userId); 
 } else {
     appointments = await getAppointmentsByPatient(userId);
 }
@@ -433,18 +432,20 @@ appointments.forEach(appointment => {
         const doctorId = parseInt(document.getElementById("appointment-doctor").value);
         if (!doctorId) return alert("Please select a doctor.");
 
-        let patientId = parseInt(localStorage.getItem("patientId"));
+
+        let selectedUserId = userId;
         if (role === "Admin") {
             const patientSelect = document.getElementById("appointment-patient");
-            patientId = parseInt(patientSelect.value);
-            if (!patientId) return alert("Please select a patient.");
+            selectedUserId = parseInt(patientSelect.value);
+            if (!selectedUserId) return alert("Please select a patient.");
         }
+
 
 
         const appointmentData = {
             appointmentDate: `${date}T${time}:00`,
             reason: reason,
-            patientId: patientId,
+            userId: selectedUserId,
             doctorId: doctorId
           };
 

@@ -39,20 +39,6 @@ document.getElementById("login-form").addEventListener("submit", async function(
                 const result = await response.json();
                 localStorage.setItem("userId", result.userId);
                 localStorage.setItem("userRole", result.role);
-
-                if (result.role === "Patient") {
-                    try {
-                        const res = await fetch(`${config.API_ENDPOINTS.getPatientByUserId}/${result.userId}`);
-                        if (!res.ok) throw new Error("Failed to fetch patientId");
-                        const data = await res.json();
-                        localStorage.setItem("patientId", data.patientId);
-                        console.log("Stored patientId:", data.patientId);
-                    } catch (err) {
-                        console.error("Could not fetch patientId:", err);
-                        alert("Unable to load patient profile. Try again or contact support.");
-                        return; // prevent redirect
-                    }
-                }
                 
                 handleLoginSuccess(result);
                 
